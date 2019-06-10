@@ -1,3 +1,9 @@
+<%
+	HttpSession hs =  request.getSession();
+	hs.removeAttribute("hand");
+	hs.removeAttribute("deck");
+
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,8 +17,8 @@
 <div align="center"> <h3>ポーカーを始めます!!下のボタンを押してください!!</h3> </div> <br><br>
 
 <form action="/Poker/First" method="GET">
-<div align="center"> <input type="submit" value="スタート"></div>
-</form>
-
+<div align="center"> <input type="submit" value="スタート">
+</div>
+<form>
 </body>
 </html>

@@ -1,8 +1,8 @@
 package card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Deck {
 	public List<Card> cards;
@@ -18,26 +18,17 @@ public class Deck {
 		}
 	}
 
-	//カードをきる
+	//山札をシャッフルする
 	public void shuffle() {
-		ArrayList<Card> shuffledDeck = new ArrayList<Card>();
-		Random rand = new Random();
-
-		for(int i=0; i < cards.size(); i++ ) {
-			int ind = rand.nextInt(cards.size());
-			shuffledDeck.add(cards.get(ind));
-		}
-		this.cards = shuffledDeck;
+		Collections.shuffle(cards);
 	}
 
-	//一番上のカードを引く
+	//一番上のカードを引く,引いたカードはデッキから外す
 	public Card draw() {
-		return cards.get(cards.size() -1);
-	}
-
-	//引いたカードをデッキから外す
-	public void Delete() {
+		Card ca = cards.get(cards.size() -1);
 		cards.remove(cards.size()-1);
+
+		return ca;
 	}
 
 }

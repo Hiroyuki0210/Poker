@@ -41,15 +41,15 @@ public class Judgement {
 			type[3] = "ロイヤルストレートフラッシュ";
 		}
 
-		if(jud.pair(hand).getPairNum().size() != 0){
+		if(jud.pair(hand).getPairNum().size() != 0 && jud.pair(hand).getNum() != 3 && jud.pair(hand).getNum() != 4){
 			type[4] = String.valueOf(jud.pair(hand).getPairNum().size())+"ペア";
 		}
 
-		if(jud.pair(hand).getNum() == 3 || jud.pair(hand).getNum() == 4){
+		if((jud.pair(hand).getNum() == 3 || jud.pair(hand).getNum() == 4) && jud.pair(hand).getPairNum().size() == 1){
 			type[5] = String.valueOf(jud.pair(hand).getNum())+"カード";
 		}
 
-		if(jud.pair(hand).getNum() == 3 && jud.pair(hand).getPairNum().size() == 1){
+		if(jud.pair(hand).getNum() == 3 && jud.pair(hand).getPairNum().size() == 2){
 			type[6] = "フルハウス";
 		}
 
@@ -58,6 +58,8 @@ public class Judgement {
 				result = type[i];
 			}
 		}
+
+		jud.returnA(hand);
 
 		return result;
 	}

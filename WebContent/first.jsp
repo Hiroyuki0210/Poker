@@ -1,19 +1,15 @@
-<%@page import="play.Card"
-		import="play.CardDetail"
-		import="java.util.ArrayList"
-		import="java.util.Random"
- %>
+<%@page import="card.Card"
+		import="card.Deck"
+		import="java.util.List"
+		import="card.Suit"
+		import="Judge.Judgement"
+%>
 <%
-	Card ca = new Card();
-	ArrayList<CardDetail> cd = new ArrayList<CardDetail>();
-
-	for(int i=0; i<5; i++){
-		cd.add(ca.deal());
-	}
-
-	Random rand = new Random();
-
-	int a = rand.nextInt(ca.v());
+	 List<Card> hand = (List<Card>)request.getAttribute("hand");
+	 Deck deck = (Deck)request.getAttribute("deck");
+	 HttpSession hs = request.getSession();
+	 hs.setAttribute("hand",hand);
+	 hs.setAttribute("deck",deck);
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,22 +17,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>手札配り</title>
+<title>第一ラウンド</title>
 </head>
 <body>
-<div align="center"><h2>次の5枚のカードが配られました</h2></div> <br><br><br><br>
+<div align="center"><h2>次の5枚のカードが配られました</h2> <br><br><br><br>
+交換するカードを選んでください。<br><br><br>
 
-<div align="center">
-<%for(int i=0; i<5; i++){ %>
-<%=cd.get(i).getType()%>の<%=cd.get(i).getNum()%>　
+<form action="/Poker/Second" method="GET">
+<% for(int i=0; i< hand.size(); i++){ %>
+
+<%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>
+<input type="checkbox" name="num" value="<%=i%>">　　
 <% } %>
-</div> <br><br><br>
+<br><br><br>
+<%=Judgement.getInstance().result(hand)%>
+<br><br><br>
+<input type="submit" value="交換する">
+</form>
+ <br><br><br>
 
-<div align="center">
-<form action="/Poker/Second" method="GET"> <input type="submit" value="交換する"> </form> <br><br>
-<form action="/Poker/Result" method="GET"> <input type="submit" value="このまま勝負する"> </form>
+<form action="/Poker/Result" method="GET"> <input type="submit" value="このまま勝負する">
+
+ </form>
+
 </div>
-
 </body>
 </html>
 

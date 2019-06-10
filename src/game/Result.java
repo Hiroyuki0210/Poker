@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import card.Deck;
-
 /**
  * Servlet implementation class Result
  */
@@ -18,8 +16,9 @@ public class Result extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     		throws ServletException, IOException{
-    	Deck deck = (Deck)request.getParameter("deck");
-    	
+
+    	request.setAttribute("judge",request.getParameter("judge"));
+
     	request.getRequestDispatcher("/result.jsp").forward(request,response);
     }
 
