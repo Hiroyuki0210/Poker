@@ -39,5 +39,5 @@
 と入力します。コンパイルしていただくソースコードはsrc内の  
 + Judgeディレクトリの各ソースコード  
 + cardディレクトリの各ソースコード
-+ PlayPoker.java
++ PlayPoker.java  
 となります。
