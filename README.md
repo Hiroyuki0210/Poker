@@ -18,4 +18,4 @@
  実行する際は、コンソールとソースコードの文字コードを一致させてください。  
  (ex) windowsのcmd の場合  
  　　　chcp  65001 (cmdの文字コードをUTF-8にする)  
-       java -Dfile.encoding=UTF-8  Poker.jar   (ソースコード側のエンコード、ファイル実行)  
+         java -Dfile.encoding=UTF-8  Poker.jar   (ソースコード側のエンコード、ファイル実行)  
