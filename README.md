@@ -11,7 +11,7 @@
 まず、このゲームを行うために、Poker.jarをダウンロードしてください。そして、cmdを開き、Poker.jarがあるディレクトリまで進み、実行してください。  
 実行方法は、  
 　　　　　chcp  65001   
-         java -Dfile.encoding=UTF-8  Poker.jar  
+         java -Dfile.encoding=UTF-8  -jar Poker.jar  
 と入力していただくと、ゲームが始まります。  
 
   
@@ -29,4 +29,4 @@
  実行する際は、コンソールとソースコードの文字コードを一致させる必要があります。  
  (ex) cmd の場合  
  　　　chcp  65001 (cmdの文字コードをUTF-8にする)  
-         java -Dfile.encoding=UTF-8  Poker.jar   (ソースコード側のエンコード、ファイル実行)  
+         java -Dfile.encoding=UTF-8  -jar Poker.jar   (ソースコード側のエンコード、ファイル実行)  
