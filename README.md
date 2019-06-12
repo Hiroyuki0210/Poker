@@ -12,7 +12,7 @@
 例として、copyという名前のディレクトリを作成し、ここにcloneします。    
 `mkdir copy`  
 `git clone https://github.com/Hiroyuki0210/Poker copy`  
-次に、リポジトリ内のPlayPoker.javaを下のようにコンパイルします。  
+Cloneされたディレクトリ内にsrcディレクトリがあることを確認し、srcディレクトリに進みます。そして、srcディレクトリ内にあるPlayPoker.javaを下のようにコンパイルします。  
         `javac -encoding UTF-8 PlayPoker.java`  
 ここで、PlayPoker.javaにはUTF-8の文字コードを使用していますので、コンパイルの際にエンコードしています。PlayPoker.javaをコンパイルすると、そのソースファイルにおいて参照されたクラスがあるファイル(cardディレクトリ内のCard.java、Deck.java、Suit.java と Judgeディレクトリ内のJudge.java、JudgeParam.java、Judgement.java)もコンパイルされ、それぞれのclassファイルが作成されます。  
         (ex) cardディレクトリ内に Card.class 、 Deck.class 、Suit.class　が作成。  
