@@ -11,7 +11,7 @@
 ポーカーをプレイするためにはコンパイルが必要となります。cmd上でソースコードのコンパイルをする手順を示します。まず、適当な場所にディレクトリを作成し、こちらのPokerリポジトリをcloneしてください。
 例として、copyという名前のディレクトリを作成し、ここにcloneします。    
 `mkdir copy`  
-`clone https://github.com/Hiroyuki0210/Poker copy`  
+`git clone https://github.com/Hiroyuki0210/Poker copy`  
 次に、リポジトリ内のPlayPoker.javaを下のようにコンパイルします。  
         `javac -encoding UTF-8 PlayPoker.java`  
 ここで、PlayPoker.javaにはUTF-8の文字コードを使用していますので、コンパイルの際にエンコードしています。PlayPoker.javaをコンパイルすると、そのソースファイルにおいて参照されたクラスがあるファイル(cardディレクトリ内のCard.java、Deck.java、Suit.java と Judgeディレクトリ内のJudge.java、JudgeParam.java、Judgement.java)もコンパイルされ、それぞれのclassファイルが作成されます。  
@@ -21,7 +21,7 @@
 ### <実行方法>  
 まず、cmd上でPlayPoker.classがあるディレクトリまで進んでください。そして、  
    `chcp  65001`  
-    `java -Dfile.encoding=UTF-8　PlayPoker`  
+    `java -Dfile.encoding=UTF-8 PlayPoker`  
 と入力していただくと、ゲームが始まります。ここで、1行目では chcp 65001 でcmd側の文字コードをUTF-8に、2行目では -Dfile.encoding=UTF-8 でclassファイルの文字コードをUTF-8 にそれぞれエンコードしています。  
 
   
