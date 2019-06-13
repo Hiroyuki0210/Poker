@@ -35,30 +35,44 @@ public class PlayPoker {
 		    	System.out.println("");
 		    	System.out.print(Judgement.getInstance().result(hand)+"\n"+"\n");
 
+		    	boolean flag = true;
 		    	//交換操作を3回行う
-		    	for(int i=0; i<3; i++) {
-		    		change(hand,deck);
-		    	}
+		    	for(int i=0; i<3; i++){
+		    		System.out.println("交換したいカードの番号を選んでください(番号は左から0,1,2,3,4となっていて、複数ある場合は　,　で区切ってください");
+					System.out.println("交換したくない場合は,5を入力してください");
+					String line2 = reader.readLine();
+					String[] num = line2.split(",");
 
+					if(Integer.parseInt(num[0]) != 5) {
+						change(hand,deck,num);
+					}else{
+						for(int j=0; j<hand.size(); j++) {
+				    		System.out.print(hand.get(j).getSuit().icon+hand.get(j).getNum()+"　");
+				    	}
+						System.out.print("\n"+Judgement.getInstance().result(hand)
+								);
+						break ;
+					}
+		    	}
 			}
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
+		}catch(IOException e) {
 			e.printStackTrace();
+		}catch(NumberFormatException | IndexOutOfBoundsException e2){
+			System.out.println("※0～5の数字を入力してください。ゲームを終了します。\n");
 		}
 	}
 
+
+
 	//カード交換用のメソッド
-	public static void change(List<Card> hand, Deck deck) {
-		try {
-			System.out.println("交換したいカードの番号を選んでください(番号は左から0,1,2,3,4となっていて、複数ある場合は　,　で区切ってください");
-			System.out.println("交換したくない場合は,5を入力してください");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			String line = reader.readLine();
+	/**
+	 * @param hand
+	 * @param deck
+	 */
+	public static void change(List<Card> hand, Deck deck, String[] num)  throws IndexOutOfBoundsException{
 
-			String[] num = line.split(",");
 			Card ca = new Card(null,0);             //手札のソート用
-
-			List<Card> set = new ArrayList<>();    //削除するカードを一時的にsetに格納
+			List<Card> set = new ArrayList<>();     //削除するカードを一時的にsetに格納
 
 			if(Integer.parseInt(num[0]) != 5) {
 	    	for(int i=0; i < num.length; i++){
@@ -73,11 +87,6 @@ public class PlayPoker {
 	    	for(int i=0; i<hand.size(); i++) {
 	    		System.out.print(hand.get(i).getSuit().icon+hand.get(i).getNum()+"　");
 	    	}
-	    	System.out.println("");
-	    	System.out.print(Judgement.getInstance().result(hand)+"\n"+"\n");
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+	    	System.out.print("\n"+Judgement.getInstance().result(hand)+"\n"+"\n");
 	}
 }
