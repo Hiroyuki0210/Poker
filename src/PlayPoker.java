@@ -63,7 +63,6 @@ public class PlayPoker {
 	}
 
 
-
 	//カード交換用のメソッド
 	/**
 	 * @param hand
