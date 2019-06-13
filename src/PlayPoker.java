@@ -59,12 +59,15 @@ public class PlayPoker {
 			Card ca = new Card(null,0);             //手札のソート用
 
 			List<Card> set = new ArrayList<>();    //削除するカードを一時的にsetに格納
+
+			if(Integer.parseInt(num[0]) != 5) {
 	    	for(int i=0; i < num.length; i++){
 	    		Collections.addAll(set, hand.get(Integer.parseInt(num[i])) );
 	    		hand.add(deck.draw());
 	    	}
 	    	hand.removeAll(set);
 	    	ca.sort(hand);
+			}
 
 	    	System.out.print("手札 : 　");
 	    	for(int i=0; i<hand.size(); i++) {
@@ -76,7 +79,5 @@ public class PlayPoker {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
-
 	}
 }
