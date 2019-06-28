@@ -22,16 +22,15 @@
 こちらの手札で勝負します<br><br><br>
 
 <% for(int i=0; i< hand.size(); i++){ %>
-
-<%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>
+<%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>　　
 <% } %>
 <br><br><br>
-<%=Judgement.getInstance().result(hand)%>
+<%=Judgement.result(hand)%>
  <br><br><br>
 
-<form action="/Poker/Result" method="GET"> <input type="submit" value="勝負する">
-<input type="hidden" name="judge" value="<%=Judgement.getInstance().result(hand)%>">
- </form>
+<form action="/Poker/Result" method="GET">
+ <input type="submit" value="勝負する">
+</form>
 
 </div>
 </body>

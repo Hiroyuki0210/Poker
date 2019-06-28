@@ -8,14 +8,14 @@ import card.Suit;
 
 //Judgeクラスで用いる変数をセット、取得する
 public class JudgeParam {
-	private int max ;
-	private Suit suit;
+	private int straightMax ;
+	private Suit straightSuit;
 	private int num ;
 	private List<Card> pairnum;
 
-	public JudgeParam(int max, Suit suit) {
-		this.max = max;
-		this.suit = suit;
+	public JudgeParam(int straightMax, Suit straightSuit) {
+		this.straightMax = straightMax;
+		this.straightSuit = straightSuit;
 	}
 
 	public JudgeParam(int num, List<Card> pairnum) {
@@ -24,11 +24,11 @@ public class JudgeParam {
 	}
 
 	public int getMaxNum() {
-		return max;
+		return straightMax;
 	}
 
 	public Suit getMaxSuit() {
-		return suit;
+		return straightSuit;
 	}
 
 	public int getNum() {

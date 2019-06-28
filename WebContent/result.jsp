@@ -25,11 +25,12 @@
 <%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>　
 <% } %>
 <br><br><br>
-<%=Judgement.getInstance().result(hand)%>
+<%=Judgement.result(hand)%>
 <br><br><br>
 
 <a href="/Poker/top.jsp">ゲームを終了する</a>
 </div>
 
+<% hs.invalidate();%>
 </body>
 </html>

@@ -5,11 +5,10 @@ import java.util.List;
 import card.Card;
 
 public class Judgement {
-	public static Judgement getInstance() {
-		return new Judgement();
-	}
+	public String judge;
 
-	public String result(List<Card> hand) {
+
+	public static String result(List<Card> hand) {
 		String result = "";
 
 		String straight = "";
@@ -21,7 +20,7 @@ public class Judgement {
 		String fullhouse = "";
 		String[] type = {straight, flash, straightflash, royalstraightflash, pair, card, fullhouse};
 
-		Judge jud = new Judge();
+		Yaku jud = new Yaku();
 
 		jud.changeA(hand);
 
@@ -61,6 +60,7 @@ public class Judgement {
 
 		jud.returnA(hand);
 
+		//this.judge = result;
 		return result;
 	}
 }

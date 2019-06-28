@@ -17,9 +17,8 @@ public class Result extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     		throws ServletException, IOException{
 
-    	request.setAttribute("judge",request.getParameter("judge"));
+    		request.getRequestDispatcher("/result.jsp").forward(request,response);
 
-    	request.getRequestDispatcher("/result.jsp").forward(request,response);
     }
 
 	/**

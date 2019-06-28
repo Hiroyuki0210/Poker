@@ -7,7 +7,7 @@ import java.util.List;
 public class Deck {
 	public List<Card> cards;
 
-	//52枚のカード(スートを区別)をデッキにセットする
+	//52枚のカードをデッキにセットするコンストラクタ
 	public Deck() {
 		this.cards = new ArrayList<>();
 
@@ -16,10 +16,6 @@ public class Deck {
 				cards.add(new Card(suit, j));
 			}
 		}
-	}
-
-	//山札をシャッフルする
-	public void shuffle() {
 		Collections.shuffle(cards);
 	}
 

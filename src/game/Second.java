@@ -1,8 +1,6 @@
 package game;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import card.Card;
 import card.Deck;
+import player.PlayerHand;
 
 /**
  * Servlet implementation class Second
@@ -25,28 +24,23 @@ public class Second extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     		throws ServletException, IOException{
 
-
     	HttpSession hs = request.getSession();
     	Deck deck = (Deck)hs.getAttribute("deck");
     	List<Card> hand = (List<Card>)hs.getAttribute("hand");
-    	List<Card> set = new ArrayList<>();
-    	Card ca = new Card(null,0);
 
-    	String [] changenum = request.getParameterValues("num");
+    	//交換するカードを選んだ場合は交換&次ページに進む、選ばなかった場合は前のページに戻る
+    	try{
+    		PlayerHand.changeCard(hand, deck, request.getParameterValues("num"));
+        	PlayerHand.sort(hand);
 
-    	//削除するカードをsetに格納
-    	for(int i=0; i < changenum.length; i++){
-    		Collections.addAll(set, hand.get(Integer.parseInt(changenum[i])) );
-    		hand.add(deck.draw());
+        	hs.setAttribute("hand", hand);
+        	hs.setAttribute("deck",deck);
+
+        	request.getRequestDispatcher("/second.jsp").forward(request,response);
+    	}catch(NullPointerException e) {
+    		request.setAttribute("warn", 1);
+    		request.getRequestDispatcher("/first.jsp").forward(request,response);
     	}
-    	hand.removeAll(set);
-
-    	ca.sort(hand);
-
-    	hs.setAttribute("hand", hand);
-    	hs.setAttribute("deck",deck);
-
-    	request.getRequestDispatcher("/second.jsp").forward(request,response);
     }
 
 	/**
