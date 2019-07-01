@@ -44,20 +44,13 @@ Cloneされたディレクトリ内にsrcディレクトリがあることを確
 ### ブラウザ上でプレイされる場合
   
 ### <tomcatの導入と使用方法>
-jspファイルを実行するには、Webコンテナが必要となります。その代表的なものとしてtomcatがあります。ここでは、tomcatを用いたjspファイルの実行方法をご紹介します。
-まず、tomcatをインストールされていない方は, <a href="http://tomcat.apache.org/download-90.cgi">こちら</a>からインストールをしてください。
-  
-### <コンパイル手順>  
-ポーカーをプレイするためにはコンパイルが必要となります。cmd上でソースコードのコンパイルをする手順を説明します。まず、適当な場所にディレクトリを作成し、こちらのPokerリポジトリをcloneしてください。
-例として、copyという名前のディレクトリを作成し、ここにcloneします。    
-　　　　　`mkdir copy`  
-　　　　　`git clone https://github.com/Hiroyuki0210/Poker copy`  
-Cloneされたディレクトリ内にsrcディレクトリがあることを確認し、srcディレクトリに進みます。そして、srcディレクトリ内にあるPlayPoker.javaを下のようにコンパイルします。  
-　　　　　`javac -encoding UTF-8 PlayPoker.java`  
-ここで、PlayPoker.javaにはUTF-8の文字コードを使用していますので、コンパイルの際にエンコードしています。PlayPoker.javaをコンパイルすると、そのソースファイルにおいて参照されたクラスがあるファイル(cardディレクトリ内のCard.java、Deck.java、Suit.java と Judgeディレクトリ内のJudge.java、JudgeParam.java、Judgement.java)もコンパイルされ、それぞれのclassファイルが作成されます。  
-　　　　　(ex) cardディレクトリ内に Card.class 、 Deck.class 、Suit.class　が作成。  
-        
-  
+　jspファイルを実行するには、Webコンテナが必要となります。その代表的なものとしてtomcatがあります。ここでは、tomcatを用いたjspファイルの実行方法をご紹介します。tomcatをインストールされていない方は, <a href="http://tomcat.apache.org/download-90.cgi">こちら</a>からインストールをしてください。  
+まず、tomcatディレクトリ内のwebappsディレクトリに"Poker"という名前のフォルダを作成してください。  
+`tomcat　→　webapps　→　Pokerフォルダを作成`  
+そして、上のWebContentディレクトリとsrcディレクトリをそれぞれダウンロードして、Pokerフォルダ内に挿入してください。  
+`Poker　→　WebContent , src`  
+以上で、ディレクトリの配置は完了です。続いて、コンパイルの手順を説明します。今回は、jspとサーブレットの連携で動作しております。jspファイルはtomcatの方で自動コンパイルしてくれますが、サーブレットファイルやその他のjavaファイルに関しては各自コンパイルしていただく必要があります。サーブレットを含むjavaファイルは、全てsrcディレクトリ内にあります。
+   
 ### <実行方法>  
 まず、cmd上でPlayPoker.classがあるディレクトリまで進んでください。そして、  
 　　　　　`chcp  65001`  
