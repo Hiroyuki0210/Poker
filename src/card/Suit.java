@@ -1,10 +1,10 @@
 package card;
 
 public enum Suit {
-	SPADE("♠", 0),
-	HEART("♥", 1),
-	DIAMOND("♦", 2),
-	CLOVER("♣", 3),
+	SPADE("♠", 3),
+	HEART("♥", 2),
+	DIAMOND("♦", 1),
+	CLOVER("♣", 0),
 	;
 
 	// Field

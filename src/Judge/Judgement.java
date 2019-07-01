@@ -5,8 +5,6 @@ import java.util.List;
 import card.Card;
 
 public class Judgement {
-	public String judge;
-
 
 	public static String result(List<Card> hand) {
 		String result = "";
@@ -33,10 +31,13 @@ public class Judgement {
 	    }
 
 	    if(5 <= jud.straight(hand).getMaxNum() && jud.straight(hand).getMaxNum() <= 14 && jud.flash(hand) == 1) {
+	    	type[0] = "";
+	    	type[1] = "";
 	    	type[2] = "ストレートフラッシュ";
 		}
 
 	    if(jud.straight(hand).getMaxNum() == 14 && jud.flash(hand) == 1) {
+	    	type[2] = "";
 			type[3] = "ロイヤルストレートフラッシュ";
 		}
 
@@ -49,6 +50,8 @@ public class Judgement {
 		}
 
 		if(jud.pair(hand).getNum() == 3 && jud.pair(hand).getPairNum().size() == 2){
+			type[4] = "";
+			type[5] = "";
 			type[6] = "フルハウス";
 		}
 
@@ -60,7 +63,6 @@ public class Judgement {
 
 		jud.returnA(hand);
 
-		//this.judge = result;
 		return result;
 	}
 }

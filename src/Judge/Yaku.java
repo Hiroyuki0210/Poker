@@ -36,13 +36,12 @@ public class Yaku {
 	}
 
 
-	//手札の数字(5つすべて)が連続するか判定(連続する場合は手札内の最大値、連続しない場合は0を返す)
+	//ストレートの判定。手札の数字(5つすべて)が連続するか判定(連続する場合は手札内の最大値、連続しない場合は0を返す)
 	public JudgeParam straight(List<Card> hand) {
 		//手札の最大値
 		int max = 0;
-		//最大値をとるカードのスート
+		//最大値(max)をとるカードのスート
 		Suit su = null;
-		List<String> kaku = new ArrayList<String>();
 
 		boolean flag1 = false;
 		boolean flag2 = false;
@@ -75,12 +74,11 @@ public class Yaku {
 			max = hand.get(hand.size()-1).getNum();
 			su = hand.get(hand.size()-1).getSuit();
 		}
-
 		return   new JudgeParam(max, su);
 	}
 
 
-	//手札のすべてのスートが同じ場合1を返し、それ以外の場合0を返す
+	//フラッシュの判定。手札のすべてのスートが同じ場合1を返し、それ以外の場合0を返す
 	public int flash(List<Card> hand) {
 		int num = 0;
 		boolean flag = true;
@@ -97,37 +95,38 @@ public class Yaku {
 	}
 
 
-	//ペアになったカードに関する情報を格納
+	//ペアとカード(3カードなど)の判定。ペアになったカードに関する情報を格納
 	public JudgeParam pair(List<Card> hand) {
-		//ペアになったカードを格納するための配列
+		/*ペアになったカードを格納するための配列(カード番号が重複するものは入れない&スートが最も強いものだけ格納)
+		 * ex: ♥3♦3♠3♠4♦5
+		 * 3のペアになっており、この中で最も強いスートは♠なのでpairnumには♠3を格納
+		 */
 		List<Card> pairnum = new ArrayList<>();
-		 //ペアカードの最大枚数(ex: 手札が 22345 ならば num=2、 33344 ならば num=3)
-		int num = 0;
+		 //最大重複枚数(ex: 手札が 22345 ならば num=2、 33344 ならば num=3)
+		int num  = 0;
 
 		//ペアになったカードを格納
 		for(int i=0; i<hand.size()-1; i++){
 			if(hand.get(i+1).getNum() == hand.get(i).getNum()) {
 				num = 2;
-				pairnum.add(hand.get(i));
+				pairnum.add(hand.get(i+1));
 			}
 		}
 
-		//重複枚数が3枚以上のとき(ex: 22234)のnumに関する処理
-			for(int i=0; i<pairnum.size()-1;i++) {
-				if(pairnum.get(i).getNum() == pairnum.get(i+1).getNum()) {
-					num++;
-				}
+		//最大重複枚数が3枚以上のとき(ex: 22234)のnumに関する処理
+		for(int i=0; i<pairnum.size()-1;i++) {
+			if(pairnum.get(i).getNum() == pairnum.get(i+1).getNum()) {
+				num++;
 			}
+		}
 
 		//pairnumの要素から重複を省く
-			if(num >= 3) {
-				for(int i=0; i < num-2; i++) {
-					pairnum.remove(i);
-				}
+		if(num >= 3) {
+			for(int i=0; i < num-2; i++) {
+				pairnum.remove(i);
 			}
-
+		}
 		return new JudgeParam(num, pairnum);
-
 	}
 
 }

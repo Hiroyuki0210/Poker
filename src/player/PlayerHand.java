@@ -10,12 +10,17 @@ import card.Deck;
 
 //プレイヤーの手札に関する機能
 public class PlayerHand {
-	//手札の並び替え
+
+	//手札の並び替え(数字の小さい順、数字が同じ場合スートの弱い順)
 	public static void sort(List<Card> hand) {
-		// Comparatorを実装した匿名クラス
+		//Comparatorを実装した匿名クラス
 		Comparator<Card> comparator = new Comparator<Card>() {
 			public int compare(Card c1, Card c2) {
-				return c1.getNum() < c2.getNum() ? -1 : 1;
+				int a = c1.getNum() - c2.getNum();
+				if(a == 0) {
+					return c1.getSuit().strength - c2.getSuit().strength;
+				}
+				return a;
 			}
 		};
 		Collections.sort(hand, comparator);
