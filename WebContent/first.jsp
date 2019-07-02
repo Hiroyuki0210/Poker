@@ -2,7 +2,7 @@
 		import="card.Deck"
 		import="java.util.List"
 		import="card.Suit"
-		import="Judge.Judgement"
+		import="judge.Judgement"
 %>
 <%
      HttpSession hs = request.getSession();
