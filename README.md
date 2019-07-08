@@ -53,6 +53,7 @@ Cloneされたディレクトリ内にsrcディレクトリがあることを確
  ・ gradle/wrapper ディレクトリ  
  ・ build.gradke  
  ・ gradle.bat (Windows、Macの方) または gradlew (Linux、Unixの方)  
+ ・ settings.gradle  
  続いて、ルートディレクトリ(Pokerディレクトリ)上でcmdを開いてください。cmdで、  
  `gradlew tomcatRunWar`  
  というコマンドを入力していただくと、次のように表示されます。  
