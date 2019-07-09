@@ -61,7 +61,8 @@ javac -classpath .;"servlet-api.jarがあるクラスパス" -encoding UTF-8 gam
 ### <実行方法と操作説明>  
 まず、ブラウザを開き、`http://localhost:8080/Poker/top.jsp` というURLを入力してください。すると、以下のような画面が表示されます。  
 
-![image](https://user-images.githubusercontent.com/51352734/60483686-81b91880-9cd1-11e9-93ad-b37d56e7b89a.png)
+![image](https://user-images.githubusercontent.com/51352734/60850689-5b443180-a22b-11e9-8b63-9e06d5ab19cc.png)
+
 
 うまく画面が表示されない場合は、先の <ディレクトリの配置とコンパイル方法> で誤った操作をしていないかご確認ください。  
 #### 失敗例
