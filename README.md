@@ -2,12 +2,12 @@
 
 ## ポーカーゲーム  
   
-### <概要>  
+### 概要 
 チップの賭けなしverポーカーをプレイします！  
 まず、初めに5枚のカードが配られます。その後、交換したいカードを選び交換していきます。より強いカードの組み合わせ(役)を目指しましょう！  
   
 
-##  プロジェクトの導入とポーカーゲームのURL取得  
+###  プロジェクトの導入とポーカーゲームのURL取得  
 　まず、cmdを用いて、Pokerプロジェクトをクローンします。  
  `git clone https://github.com/Hiroyuki0210/Poker.git`  
  続いて、ルートディレクトリ(Pokerディレクトリ)上で  
@@ -31,7 +31,7 @@ The Server is running at http://localhost:8080/Poker
  ・tomcatを停止させたい場合は、cmd上で Ctrl + c を入力すると、バッチジョブを終了しますかという内容の質問が表示されるので、yesと答えてください。  
  
    
-## プレイ方法
+### プレイ方法
 まず、ブラウザを開き、`http://localhost:8080/Poker/top.jsp` というURLを入力してください。すると、以下のような画面が表示されます。  
 
 ![image](https://user-images.githubusercontent.com/51352734/60850771-c0982280-a22b-11e9-8e3e-914fb15d8a25.png)  
