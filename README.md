@@ -61,7 +61,8 @@ javac -classpath .;"servlet-api.jarがあるクラスパス" -encoding UTF-8 gam
 ### <実行方法と操作説明>  
 まず、ブラウザを開き、`http://localhost:8080/Poker/top.jsp` というURLを入力してください。すると、以下のような画面が表示されます。  
 
-![image](https://user-images.githubusercontent.com/51352734/60850689-5b443180-a22b-11e9-8b63-9e06d5ab19cc.png)
+![image](https://user-images.githubusercontent.com/51352734/60850771-c0982280-a22b-11e9-8e3e-914fb15d8a25.png)  
+
 
 
 うまく画面が表示されない場合は、先の <ディレクトリの配置とコンパイル方法> で誤った操作をしていないかご確認ください。  
@@ -71,6 +72,6 @@ javac -classpath .;"servlet-api.jarがあるクラスパス" -encoding UTF-8 gam
   
 上の画面が表示されたら、"スタート"ボタンをクリックし、Pokerゲームを開始します。  
 ゲーム開始後、以下の画面のように5枚の手札が配られます。役がある場合は、カード下に表示されます。交換したいカードがある場合は、カード番号の横にあるチェックボックスにチェックを入れ、"交換する"ボタンを押してください。交換するカードがない場合は、"このまま勝負する"ボタンを押してください。    
-![image](https://user-images.githubusercontent.com/51352734/60483897-6995c900-9cd2-11e9-963d-ba34dbe3f9be.png)  
+![image](https://user-images.githubusercontent.com/51352734/60850877-1e2c6f00-a22c-11e9-8db2-79bd015d778a.png)  
 交換回数は最大で3回までです。交換が終わると結果画面が表示され、"ゲームを終了する"を押すとトップ画面に戻ります。  
-![image](https://user-images.githubusercontent.com/51352734/60484198-97c7d880-9cd3-11e9-80d5-eed0891e1e18.png)  
+![image](https://user-images.githubusercontent.com/51352734/60850942-6186dd80-a22c-11e9-8845-c3fde9afea53.png)    
