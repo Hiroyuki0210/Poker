@@ -24,7 +24,7 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,4));
 		hand.add(new Card(Suit.SPADE,5));
 		hand.add(new Card(Suit.CLOVER,6));
-		assertEquals(Judgement.result(hand),PokerHand.STRAIGHT.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.STRAIGHT.getName());
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class JudgeTest {
 		for(int i=1; i <10 ; i += 2) {
 			hand.add(new Card(Suit.SPADE,i));
 		}
-		assertEquals(Judgement.result(hand),PokerHand.FLASH.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.FLASH.getName());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class JudgeTest {
 		for(int i=1; i <=5 ; i++) {
 			hand.add(new Card(Suit.SPADE,i));
 		}
-		assertEquals(Judgement.result(hand),PokerHand.STRAIGHTFLASH.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.STRAIGHTFLASH.getName());
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class JudgeTest {
 		for(int i=10; i <=13 ; i++) {
 			hand.add(new Card(Suit.SPADE,i));
 		}
-		assertEquals(Judgement.result(hand),PokerHand.ROYALSTRAIGHTFLASH.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.ROYALSTRAIGHTFLASH.getName());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,5));
 		hand.add(new Card(Suit.SPADE,5));
 		hand.add(new Card(Suit.SPADE,8));
-		assertEquals(Judgement.result(hand),PokerHand.TWOPAIR.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.TWOPAIR.getName());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,5));
 		hand.add(new Card(Suit.SPADE,6));
 		hand.add(new Card(Suit.SPADE,8));
-		assertEquals(Judgement.result(hand),PokerHand.ONEPAIR.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.ONEPAIR.getName());
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,2));
 		hand.add(new Card(Suit.SPADE,5));
 		hand.add(new Card(Suit.SPADE,8));
-		assertEquals(Judgement.result(hand),PokerHand.THREECARD.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.THREECARD.getName());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,2));
 		hand.add(new Card(Suit.DIAMOND,2));
 		hand.add(new Card(Suit.SPADE,8));
-		assertEquals(Judgement.result(hand),PokerHand.FOURCARD.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.FOURCARD.getName());
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,2));
 		hand.add(new Card(Suit.SPADE,8));
 		hand.add(new Card(Suit.HEART,8));
-		assertEquals(Judgement.result(hand),PokerHand.FULLHOUSE.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.FULLHOUSE.getName());
 	}
 
 	@Test
@@ -109,6 +109,6 @@ public class JudgeTest {
 		hand.add(new Card(Suit.CLOVER,7));
 		hand.add(new Card(Suit.SPADE,8));
 		hand.add(new Card(Suit.HEART,10));
-		assertEquals(Judgement.result(hand),PokerHand.NOTHING.getName());
+		assertEquals(Judgement.result(hand).getName(),PokerHand.NOTHING.getName());
 	}
 }
