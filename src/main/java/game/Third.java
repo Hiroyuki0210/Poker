@@ -20,26 +20,25 @@ import player.PlayerHand;
 @WebServlet("/Third")
 public class Third extends HttpServlet {
 
-	   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-	    		throws ServletException, IOException{
+		protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-	    	HttpSession hs = request.getSession();
-	    	Deck deck = (Deck)hs.getAttribute("deck");
-	    	List<Card> hand = (List<Card>)hs.getAttribute("hand");
+			HttpSession hs = request.getSession();
+			Deck deck = (Deck)hs.getAttribute("deck");
+			List<Card> hand = (List<Card>)hs.getAttribute("hand");
 
-	    	try {
-	    		PlayerHand.changeCard(hand, deck, request.getParameterValues("num"));
-	        	PlayerHand.sort(hand);
+			try {
+				PlayerHand.changeCard(hand, deck, request.getParameterValues("num"));
+				PlayerHand.sort(hand);
 
-	        	hs.setAttribute("hand", hand);
-	        	hs.setAttribute("deck",deck);
+				hs.setAttribute("hand", hand);
+				hs.setAttribute("deck",deck);
 
-	        	request.getRequestDispatcher("/third.jsp").forward(request,response);
-	    	}catch(NullPointerException e) {
-	    		request.setAttribute("warn", 1);
-	    		request.getRequestDispatcher("/second.jsp").forward(request,response);
-	    	}
-	    }
+				request.getRequestDispatcher("/third.jsp").forward(request,response);
+			}catch(NullPointerException e) {
+				request.setAttribute("warn", 1);
+				request.getRequestDispatcher("/second.jsp").forward(request,response);
+			}
+		}
 
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

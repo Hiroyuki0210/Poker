@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Result")
 public class Result extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    		throws ServletException, IOException{
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-    		request.getRequestDispatcher("/result.jsp").forward(request,response);
+			request.getRequestDispatcher("/result.jsp").forward(request,response);
 
-    }
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,5 +33,5 @@ public class Result extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request,response);
 	}
-
+	
 }

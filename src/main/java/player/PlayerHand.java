@@ -32,9 +32,9 @@ public class PlayerHand {
 
 		//削除するカードのを番号をsetに格納
 		for(int i=0; i < changenum.length; i++){
-    		Collections.addAll(set, hand.get(Integer.parseInt(changenum[i])));
-    		hand.add(deck.draw());
-    	}
+			Collections.addAll(set, hand.get(Integer.parseInt(changenum[i])));
+			hand.add(deck.draw());
+		}
 		//指定番号のカードを一度に全て削除
 		hand.removeAll(set);
 	}

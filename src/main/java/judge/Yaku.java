@@ -82,7 +82,7 @@ public class Yaku {
 		for(int i=0; i < hand.size()-1; i++){
 			if(hand.get(i+1).getNum() - hand.get(i).getNum() == 1) {
 				flag2 = true;
-			}else {
+			}else{
 				flag2 = false;
 				break;
 			}
@@ -100,14 +100,14 @@ public class Yaku {
 		int num = 0;
 		boolean flag = true;
 
-	    for(int i = 1; i< hand.size() && flag; i++){
-	        if(hand.get(i).getSuit() != hand.get(0).getSuit()){
-	        	flag = false;
-	        }
-	    }
-	    if(flag){
-	    	num = 1;
-	    }
+		for(int i = 1; i< hand.size() && flag; i++){
+			if(hand.get(i).getSuit() != hand.get(0).getSuit()){
+				flag = false;
+			}
+		}
+		if(flag){
+			num = 1;
+		}
 		return num;
 	}
 
