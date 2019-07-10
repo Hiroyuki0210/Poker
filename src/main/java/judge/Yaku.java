@@ -7,14 +7,32 @@ import card.Card;
 import card.Suit;
 import player.PlayerHand;
 
+
 /** 役を判定するクラス(ポーカーの役は英語でhandだが、ここでは手札でhandを用いているので
  *  混同しないようにクラス名をYakuとしている)
  *  このクラスを使用する前提として、手札のカードが小さい順に並んでいる
  */
 public class Yaku {
+	//フィールド
+	List<Card> hand;
+
+	//コンストラクタ
+	public Yaku(List<Card> hand){
+		//手札枚数が5枚でない場合の例外処理
+		if(hand.size()!= 5){
+			throw new IllegalArgumentException("現在の手札枚数は"+hand.size()+"枚です。5枚にしてください。");
+		}
+		//トランプのカード数字が1~13でないorスートが指定されていない場合の例外処理
+		for(Card ca : hand){
+			if(!(1 <= ca.getNum() && ca.getNum() <= 13) || ca.getSuit() == null){
+					throw new IllegalArgumentException("数字もしくはスートが不正なカードがあります。");
+			}
+		}
+		this.hand = hand;
+	}
 
 	//ポーカーでは基本的にA(数字だと1)はK(13)より強いので、Aを14としておく(特例があるので、そのときに1と戻す)。
-	public void changeA(List<Card> hand){
+	public void changeA(){
 		for(int i=0; i < hand.size(); i++) {
 			if(hand.get(i).getNum() == 1){
 				hand.set(i, new Card(hand.get(i).getSuit(), 14));
@@ -26,7 +44,7 @@ public class Yaku {
 
 
 	//Aを14から1に戻す
-	public void returnA(List<Card> hand){
+	public void returnA(){
 		for(int i=0; i < hand.size(); i++) {
 			if(hand.get(i).getNum() == 14){
 				hand.set(i, new Card(hand.get(i).getSuit(), 1));
@@ -35,9 +53,8 @@ public class Yaku {
 		PlayerHand.sort(hand);
 	}
 
-
 	//ストレートの判定。手札の数字(5つすべて)が連続するか判定(連続する場合は手札内の最大値、連続しない場合は0を返す)
-	public JudgeParam straight(List<Card> hand) {
+	public JudgeParam straight() {
 		//手札の最大値
 		int max = 0;
 		//最大値(max)をとるカードのスート
@@ -79,7 +96,7 @@ public class Yaku {
 
 
 	//フラッシュの判定。手札のすべてのスートが同じ場合1を返し、それ以外の場合0を返す
-	public int flash(List<Card> hand) {
+	public int flash() {
 		int num = 0;
 		boolean flag = true;
 
@@ -96,7 +113,7 @@ public class Yaku {
 
 
 	//ペアとカード(3カードなど)の判定。ペアになったカードに関する情報を格納
-	public JudgeParam pair(List<Card> hand) {
+	public JudgeParam pair() {
 		/*ペアになったカードを格納するための配列(カード番号が重複するものは入れない&スートが最も強いものだけ格納)
 		 * ex: ♥3♦3♠3♠4♦5
 		 * 3のペアになっており、この中で最も強いスートは♠なのでpairnumには♠3を格納

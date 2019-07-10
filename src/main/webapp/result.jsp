@@ -25,7 +25,7 @@
 <%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>　
 <% } %>
 <br><br><br>
-<%=Judgement.result(hand)%>
+<%=Judgement.result(hand).getName()%>
 <br><br><br>
 
 <a href="/Poker/top.jsp">ゲームを終了する</a>

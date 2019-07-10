@@ -1,11 +1,11 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import card.Card;
 import card.Suit;
@@ -13,12 +13,12 @@ import judge.Judgement;
 import judge.PokerHand;
 
 //10種類の役のテスト
-class JudgeTest {
+public class JudgeTest {
 
 	List<Card> hand = new ArrayList<>();
 
 	@Test
-	void straight() {
+	public void straight() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,3));
 		hand.add(new Card(Suit.CLOVER,4));
@@ -28,15 +28,15 @@ class JudgeTest {
 	}
 
 	@Test
-	void flash() {
-		for(int i=0; i <5 ; i += 2) {
+	public void flash() {
+		for(int i=1; i <10 ; i += 2) {
 			hand.add(new Card(Suit.SPADE,i));
 		}
 		assertEquals(Judgement.result(hand),PokerHand.FLASH.getName());
 	}
 
 	@Test
-	void straightflash() {
+	public void straightflash() {
 		for(int i=1; i <=5 ; i++) {
 			hand.add(new Card(Suit.SPADE,i));
 		}
@@ -44,7 +44,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void royalstraightflash() {
+	public void royalstraightflash() {
 		hand.add(new Card(Suit.SPADE,1));
 		for(int i=10; i <=13 ; i++) {
 			hand.add(new Card(Suit.SPADE,i));
@@ -53,7 +53,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void twoPair() {
+	public void twoPair() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,2));
 		hand.add(new Card(Suit.CLOVER,5));
@@ -63,7 +63,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void onewPair() {
+	public void onewPair() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,2));
 		hand.add(new Card(Suit.CLOVER,5));
@@ -73,7 +73,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void threeCard() {
+	public void threeCard() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,2));
 		hand.add(new Card(Suit.CLOVER,2));
@@ -83,7 +83,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void fourCard() {
+	public void fourCard() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,2));
 		hand.add(new Card(Suit.CLOVER,2));
@@ -93,7 +93,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void fullhouse() {
+	public void fullhouse() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,2));
 		hand.add(new Card(Suit.CLOVER,2));
@@ -103,7 +103,7 @@ class JudgeTest {
 	}
 
 	@Test
-	void nothing() {
+	public void nothing() {
 		hand.add(new Card(Suit.SPADE,2));
 		hand.add(new Card(Suit.HEART,4));
 		hand.add(new Card(Suit.CLOVER,7));
@@ -111,6 +111,4 @@ class JudgeTest {
 		hand.add(new Card(Suit.HEART,10));
 		assertEquals(Judgement.result(hand),PokerHand.NOTHING.getName());
 	}
-
-
 }

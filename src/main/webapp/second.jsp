@@ -27,7 +27,7 @@
 <input type="checkbox" name="num" value="<%=i%>">　　
 <% } %>
 <br><br><br>
-<%=Judgement.result(hand)%>
+<%=Judgement.result(hand).getName()%>
 <br><br><br>
 <input type="submit" value="交換する">
 </form>

@@ -13,4 +13,9 @@ build
 
 WebContent
 
+bin/
+
+#Ignore directory about Visual Studio
+.vscode
+
 
