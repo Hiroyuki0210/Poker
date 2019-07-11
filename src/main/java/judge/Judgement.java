@@ -27,16 +27,16 @@ public class Judgement {
 			result = PokerHand.ROYALSTRAIGHTFLASH;
 		}
 
-		if(jud.pair().getPairNum().size() != 0 && jud.pair().getNum() != 3 && jud.pair().getNum() != 4){
-			if(jud.pair().getPairNum().size() == 1) {
+		if(jud.pair().getPairCard().size() != 0 && jud.pair().getNum() != 3 && jud.pair().getNum() != 4){
+			if(jud.pair().getPairCard().size() == 1) {
 				result = PokerHand.ONEPAIR;
 			}
-			if(jud.pair().getPairNum().size() == 2) {
+			if(jud.pair().getPairCard().size() == 2) {
 				result = PokerHand.TWOPAIR;
 			}
 		}
 
-		if((jud.pair().getNum() == 3 || jud.pair().getNum() == 4) && jud.pair().getPairNum().size() == 1){
+		if((jud.pair().getNum() == 3 || jud.pair().getNum() == 4) && jud.pair().getPairCard().size() == 1){
 			if(jud.pair().getNum() == 3) {
 				result = PokerHand.THREECARD;
 			}
@@ -45,7 +45,7 @@ public class Judgement {
 			}
 		}
 
-		if(jud.pair().getNum() == 3 && jud.pair().getPairNum().size() == 2){
+		if(jud.pair().getNum() == 3 && jud.pair().getPairCard().size() == 2){
 			result = PokerHand.FULLHOUSE;
 		}
 

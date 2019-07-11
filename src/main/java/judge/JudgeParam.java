@@ -11,16 +11,16 @@ public class JudgeParam {
 	private int straightMax ;
 	private Suit straightSuit;
 	private int num ;
-	private List<Card> pairnum;
+	private List<Card> paircard;
 
 	public JudgeParam(int straightMax, Suit straightSuit) {
 		this.straightMax = straightMax;
 		this.straightSuit = straightSuit;
 	}
 
-	public JudgeParam(int num, List<Card> pairnum) {
+	public JudgeParam(int num, List<Card> paircard) {
 		this.num = num;
-		this.pairnum = pairnum;
+		this.paircard = paircard;
 	}
 
 	public int getMaxNum() {
@@ -35,8 +35,8 @@ public class JudgeParam {
 		return num;
 	}
 
-	public List<Card> getPairNum() {
-		return pairnum;
+	public List<Card> getPairCard() {
+		return paircard;
 	}
 
 }

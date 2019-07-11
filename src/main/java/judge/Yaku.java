@@ -118,7 +118,7 @@ public class Yaku {
 		 * ex: ♥3♦3♠3♠4♦5
 		 * 3のペアになっており、この中で最も強いスートは♠なのでpairnumには♠3を格納
 		 */
-		List<Card> pairnum = new ArrayList<>();
+		List<Card> paircard = new ArrayList<>();
 		 //最大重複枚数(ex: 手札が 22345 ならば num=2、 33344 ならば num=3)
 		int num  = 0;
 
@@ -126,13 +126,13 @@ public class Yaku {
 		for(int i=0; i<hand.size()-1; i++){
 			if(hand.get(i+1).getNum() == hand.get(i).getNum()) {
 				num = 2;
-				pairnum.add(hand.get(i+1));
+				paircard.add(hand.get(i+1));
 			}
 		}
 
 		//最大重複枚数が3枚以上のとき(ex: 22234)のnumに関する処理
-		for(int i=0; i<pairnum.size()-1;i++) {
-			if(pairnum.get(i).getNum() == pairnum.get(i+1).getNum()) {
+		for(int i=0; i<paircard.size()-1;i++) {
+			if(paircard.get(i).getNum() == paircard.get(i+1).getNum()) {
 				num++;
 			}
 		}
@@ -140,10 +140,10 @@ public class Yaku {
 		//pairnumの要素から重複を省く
 		if(num >= 3) {
 			for(int i=0; i < num-2; i++) {
-				pairnum.remove(i);
+				paircard.remove(i);
 			}
 		}
-		return new JudgeParam(num, pairnum);
+		return new JudgeParam(num, paircard);
 	}
 
 }
