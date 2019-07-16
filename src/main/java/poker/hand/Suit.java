@@ -1,4 +1,4 @@
-package poker;
+package poker.hand;
 
 public enum Suit {
 	SPADE("♠", 3),

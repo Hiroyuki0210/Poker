@@ -1,4 +1,4 @@
-package poker;
+package poker.hand;
 
 public class Card{
 	private Suit suit;

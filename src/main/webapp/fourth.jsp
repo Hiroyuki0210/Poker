@@ -1,8 +1,7 @@
-<%@page import="poker.Card"
-		import="poker.Deck"
+<%@page import="poker.hand.Card"
+		import="poker.hand.Deck"
 		import="java.util.List"
-		import="poker.Suit"
-		import="poker.Judgement"
+		import="poker.hand.hand.Hand"
 %>
 <%
 	 HttpSession hs = request.getSession();
@@ -25,7 +24,7 @@
 <%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>　　
 <% } %>
 <br><br><br>
-<%=Judgement.result(hand).getName()%>
+<%=Hand.getHand(hand).getName()%>
  <br><br><br>
 
 <form action="/Poker/Result" method="GET">

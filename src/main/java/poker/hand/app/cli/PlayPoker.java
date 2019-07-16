@@ -1,4 +1,4 @@
-package poker.app.cli;
+package poker.hand.app.cli;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import poker.Card;
-import poker.Deck;
-import poker.Judgement;
-import poker.PlayerHand;
+import poker.hand.Card;
+import poker.hand.Deck;
+import poker.hand.PlayerHand;
+import poker.hand.hand.Hand;
 
 public class PlayPoker {
 	//ポーカーの実行
@@ -33,7 +33,7 @@ public class PlayPoker {
 		    		System.out.print(hand.get(i).getSuit().icon+hand.get(i).getNum()+"　");
 		    	}
 		    	System.out.println("");
-		    	System.out.print(Judgement.result(hand)+"\n"+"\n");
+		    	System.out.print(Hand.getHand(hand)+"\n"+"\n");
 
 		    	//交換操作を3回行う
 		    	for(int i=0; i<3; i++){
@@ -48,7 +48,7 @@ public class PlayPoker {
 						for(int j=0; j<hand.size(); j++) {
 				    		System.out.print(hand.get(j).getSuit().icon+hand.get(j).getNum()+"　");
 				    	}
-						System.out.print("\n"+Judgement.result(hand)
+						System.out.print("\n" + Hand.getHand(hand)
 								);
 						break ;
 					}
@@ -84,6 +84,6 @@ public class PlayPoker {
 	    	for(int i=0; i<hand.size(); i++) {
 	    		System.out.print(hand.get(i).getSuit().icon+hand.get(i).getNum()+"　");
 	    	}
-	    	System.out.print("\n"+Judgement.result(hand)+"\n"+"\n");
+	    	System.out.print("\n" + Hand.getHand(hand)+"\n"+"\n");
 	}
 }

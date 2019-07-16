@@ -1,8 +1,7 @@
-<%@page import="poker.Card"
-		import="poker.Deck"
+<%@page import="poker.hand.Card"
+		import="poker.hand.Deck"
 		import="java.util.List"
-		import="poker.Suit"
-		import="poker.Judgement"
+		import="poker.hand.hand.Hand"
 %>
 <%
 	 HttpSession hs = request.getSession();
@@ -27,7 +26,7 @@
 <input type="checkbox" name="num" value="<%=i%>">　　
 <% } %>
 <br><br><br>
-<%=Judgement.result(hand).getName()%>
+<%=Hand.getHand(hand).getName()%>
 <br><br><br>
 <input type="submit" value="交換する">
 </form>

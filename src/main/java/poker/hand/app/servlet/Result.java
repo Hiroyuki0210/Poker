@@ -1,4 +1,4 @@
-package poker.app.servlet;
+package poker.hand.app.servlet;
 
 import java.io.IOException;
 

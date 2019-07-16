@@ -1,4 +1,4 @@
-package poker.app.servlet;
+package poker.hand.app.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import poker.Card;
-import poker.Deck;
-import poker.PlayerHand;
+import poker.hand.Card;
+import poker.hand.Deck;
+import poker.hand.PlayerHand;
 
 /**
  * Servlet implementation class Second

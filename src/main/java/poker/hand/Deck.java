@@ -1,4 +1,4 @@
-package poker;
+package poker.hand;
 
 import java.util.ArrayList;
 import java.util.Collections;
