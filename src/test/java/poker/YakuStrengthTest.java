@@ -1,13 +1,9 @@
-package test;
+package poker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
-import card.Card;
-import card.Suit;
-import judge.Judgement;
 
 //役の強さのテスト
 public class YakuStrengthTest {

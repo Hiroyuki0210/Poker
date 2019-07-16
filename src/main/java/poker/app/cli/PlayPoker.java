@@ -1,3 +1,5 @@
+package poker.app.cli;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import card.Card;
-import card.Deck;
-import judge.Judgement;
-import player.PlayerHand;
+import poker.Card;
+import poker.Deck;
+import poker.Judgement;
+import poker.PlayerHand;
 
 public class PlayPoker {
 	//ポーカーの実行
-	public static void main(String arg[]) {
+	public static void main(String[] args) {
 		try {
 			System.out.println("Let's do Poker!! Write start");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

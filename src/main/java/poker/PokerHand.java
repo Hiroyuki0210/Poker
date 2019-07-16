@@ -1,4 +1,4 @@
-package judge;
+package poker;
 
 //役の名前&強さの列挙型
 public enum PokerHand {

@@ -1,8 +1,8 @@
-<%@page import="card.Card"
-		import="card.Deck"
+<%@page import="poker.Card"
+		import="poker.Deck"
 		import="java.util.List"
-		import="card.Suit"
-		import="judge.Judgement"
+		import="poker.Suit"
+		import="poker.Judgement"
 %>
 <%
 	 HttpSession hs = request.getSession();

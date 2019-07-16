@@ -1,4 +1,4 @@
-package test;
+package poker;
 
 import static org.junit.Assert.*;
 
@@ -7,15 +7,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-import card.Card;
-import card.Suit;
-import judge.Judgement;
-import judge.PokerHand;
-
 //10種類の役のテスト
 public class JudgeTest {
 
 	List<Card> hand = new ArrayList<>();
+
+	@Test
+	public void straight_() {
+		hand.add(new Card(Suit.CLOVER,1));
+		hand.add(new Card(Suit.SPADE,2));
+		hand.add(new Card(Suit.HEART,3));
+		hand.add(new Card(Suit.CLOVER,4));
+		hand.add(new Card(Suit.SPADE,5));
+		assertEquals(Judgement.result(hand),PokerHand.STRAIGHT);
+	}
 
 	@Test
 	public void straight() {

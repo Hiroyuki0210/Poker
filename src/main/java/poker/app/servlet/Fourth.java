@@ -1,7 +1,6 @@
-package game;
+package poker.app.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,35 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import card.Card;
-import card.Deck;
-import player.PlayerHand;
+import poker.Card;
+import poker.Deck;
+import poker.PlayerHand;
 
 /**
- * Servlet implementation class First
+ * Servlet implementation class Fourth
  */
-@WebServlet("/First")
-public class First extends HttpServlet {
-
+@WebServlet("/Fourth")
+public class Fourth extends HttpServlet {
+	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-		//山札用意
-		Deck deck = new Deck();
-		//プレイヤー側の手札
-		List<Card> hand = new ArrayList<Card>();
 		HttpSession hs = request.getSession();
+		Deck deck = (Deck)hs.getAttribute("deck");
+		List<Card> hand = (List<Card>)hs.getAttribute("hand");
 
-		//プレイヤーとCPUの手札を配る
-		for(int i=0; i < 5; i++){
-			hand.add(deck.draw());
+		try {
+			PlayerHand.changeCard(hand, deck, request.getParameterValues("num"));
+			PlayerHand.sort(hand);
+
+			hs.setAttribute("hand", hand);
+			hs.setAttribute("deck",deck);
+
+			request.getRequestDispatcher("/fourth.jsp").forward(request,response);
+		}catch(NullPointerException e) {
+			request.setAttribute("warn", 1);
+			request.getRequestDispatcher("/third.jsp").forward(request,response);
 		}
-		//手札を数字の小さい順に並べる
-		PlayerHand.sort(hand);
-
-		hs.setAttribute("hand",hand);
-		hs.setAttribute("deck",deck);
-
-		request.getRequestDispatcher("/first.jsp").forward(request,response);
 	}
 
 	/**
@@ -55,5 +53,5 @@ public class First extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request,response);
 	}
-	
+
 }

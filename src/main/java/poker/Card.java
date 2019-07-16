@@ -1,4 +1,4 @@
-package card;
+package poker;
 
 public class Card{
 	private Suit suit;

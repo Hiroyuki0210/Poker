@@ -1,4 +1,4 @@
-package test;
+package poker;
 
 import static org.junit.Assert.*;
 
@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
-import card.Card;
-import card.Suit;
-import judge.CompareMaxNum;
-import judge.PokerHand;
 
 /**役が同じだった場合、それぞれの手札カードの最大値で勝敗決定
  * 各メソッドでは、hand2が勝つように設定している

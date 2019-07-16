@@ -1,12 +1,12 @@
-package player;
+package poker;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import card.Card;
-import card.Deck;
+import poker.Card;
+import poker.Deck;
 
 //プレイヤーの手札に関する機能
 public class PlayerHand {

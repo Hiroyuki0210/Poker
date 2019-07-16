@@ -1,9 +1,9 @@
-package judge;
+package poker;
 
 import java.util.List;
 
-import card.Card;
-import card.Suit;
+import poker.Card;
+import poker.Suit;
 
 
 //Judgeクラスで用いる変数をセット、取得する

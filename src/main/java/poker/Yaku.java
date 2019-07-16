@@ -1,11 +1,7 @@
-package judge;
+package poker;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import card.Card;
-import card.Suit;
-import player.PlayerHand;
 
 
 /** 役を判定するクラス(ポーカーの役は英語でhandだが、ここでは手札でhandを用いているので

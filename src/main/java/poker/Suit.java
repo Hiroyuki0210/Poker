@@ -1,4 +1,4 @@
-package card;
+package poker;
 
 public enum Suit {
 	SPADE("♠", 3),

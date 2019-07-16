@@ -1,8 +1,6 @@
-package judge;
+package poker;
 
 import java.util.List;
-
-import card.Card;
 
 //プレイヤーとCPUの手札の役が同じ場合、手札カードの最大値を比較
 public class CompareMaxNum {

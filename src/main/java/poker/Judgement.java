@@ -1,8 +1,6 @@
-package judge;
+package poker;
 
 import java.util.List;
-
-import card.Card;
 
 public class Judgement {
 
