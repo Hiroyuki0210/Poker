@@ -1,8 +1,8 @@
-<%@page import="card.Card"
-		import="card.Deck"
+<%@page import="poker.Card"
+		import="poker.Deck"
+		import="poker.Suit"
+		import="poker.hand.Hand"
 		import="java.util.List"
-		import="card.Suit"
-		import="judge.Judgement"
 %>
 <%
 	 HttpSession hs = request.getSession();
@@ -25,7 +25,7 @@
 <%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>　
 <% } %>
 <br><br><br>
-<%=Judgement.result(hand).getName()%>
+<%=Hand.getHand(hand).getName()%>
 <br><br><br>
 
 <a href="/Poker/top.jsp">ゲームを終了する</a>
