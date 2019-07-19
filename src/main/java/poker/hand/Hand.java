@@ -4,6 +4,7 @@ import java.util.*;
 
 import poker.Card;
 import poker.Suit;
+import poker.PlayerHand;
 
 public abstract class Hand implements Comparable<Hand>{
     public abstract int getHandRank();
@@ -12,11 +13,20 @@ public abstract class Hand implements Comparable<Hand>{
 
     //役の判定
     public static Hand getHand(List<Card> hand){
+
+        //AはKよりも強いので、Aの値を14に設定
+        for(int i = 0 ; i < hand.size();i++){
+            if(hand.get(i).getNum() == 1){
+                hand.set(i, new Card(hand.get(i).getSuit(), 14));
+            }
+        }
+        PlayerHand.sort(hand);
+
         boolean isStraight = isStraight(hand);
         boolean isFlush  = isFlush(hand);
 
         if(isStraight && isFlush){
-            if(hand.get(0).getNum() == 1 && hand.get(4).getNum() == 13){
+            if(hand.get(3).getNum() == 13 &&hand.get(4).getNum() == 14){
                 return new RoyalStraightFlush(hand);
             }
 
@@ -36,19 +46,27 @@ public abstract class Hand implements Comparable<Hand>{
 
     //カード番号が連続するか否かの判定
     static boolean isStraight(List<Card> hand){
-        int last;
-        last = hand.get(1).getNum();
+        int value = hand.get(0).getNum();
 
-        for(int id = 2; id < hand.size(); id++){
+        for(int id = 1; id < hand.size() - 1; id++){
             Card card = hand.get(id);
-            if(last + 1 != card.getNum()){
+
+            if(value + 1 != card.getNum()){
                 return false;
             }
-            last = card.getNum();
+            value = card.getNum();
         }
 
-        int top = hand.get(0).getNum();
-        return top + 4 == last || (last == 13 && top == 1);
+        int last = hand.get(4).getNum();
+
+        //A2345のストレートのときは、Aを1として扱う。
+        if(value + 9 == last){
+            value = 4;
+            last = 5;
+            hand.set(4,new Card(hand.get(4).getSuit(), 1));
+            PlayerHand.sort(hand);
+        }
+        return value + 1 == last ;
     }
 
     //ペアカードがあるか否かの判定
@@ -94,9 +112,9 @@ public abstract class Hand implements Comparable<Hand>{
                 List<Card> c2 = values.get(1);
 
                 if(c1.size() == 3){
-                    return new FullHouse(c1,c2);
+                    return new FullHouse(c1);
                 }else{
-                    return new FullHouse(c2,c1);
+                    return new FullHouse(c2);
                 }
             case 1:
                 if(counter.size() == 1){
