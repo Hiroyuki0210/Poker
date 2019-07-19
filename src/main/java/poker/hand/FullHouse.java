@@ -6,12 +6,9 @@ import java.util.List;
 
 public class FullHouse extends Hand implements Comparable<Hand>{
     private final List<Card> three;
-    private final List<Card> two;
 
-
-    public FullHouse(List<Card> three, List<Card> two){
+    public FullHouse(List<Card> three){
         this.three = three;
-        this.two = two;
     }
 
     @Override
@@ -36,10 +33,8 @@ public class FullHouse extends Hand implements Comparable<Hand>{
         }
 
         FullHouse other = (FullHouse)o;
-        int num = compareRate(this.three.get(0),other.three.get(0));
-        if (num == 0) {
-			return compareRate(this.two.get(0), other.two.get(0));
-        }
+        int num = compareRate(this.three,other.three);
+
         return num;
     }
 }
