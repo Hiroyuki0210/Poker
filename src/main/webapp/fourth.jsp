@@ -8,6 +8,7 @@
 	 HttpSession hs = request.getSession();
 	 List<Card> hand = (List<Card>)hs.getAttribute("hand");
 	 Deck deck = (Deck)hs.getAttribute("deck");
+	 String yaku = Hand.getHand(hand).getName();
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,10 +23,10 @@
 こちらの手札で勝負します<br><br><br>
 
 <% for(int i=0; i< hand.size(); i++){ %>
-<%=hand.get(i).getSuit()%><%=hand.get(i).getSuit().icon%>の<%=hand.get(i).getNum()%>　　
+<%=hand.get(i).getSuit().icon%><%=hand.get(i).getStringNum()%>　　
 <% } %>
 <br><br><br>
-<%=Hand.getHand(hand).getName()%>
+<%=yaku%>
  <br><br><br>
 
 <form action="/Poker/Result" method="GET">

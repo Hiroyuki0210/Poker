@@ -17,4 +17,21 @@ public class Card{
 		return number;
 	}
 
+	public String getStringNum(){
+		String stringNum = String.valueOf(number);
+		if(number == 1 || number == 14){
+			stringNum = "A";
+		}
+		if(number == 11){
+			stringNum = "J";
+		}
+		if(number == 12){
+			stringNum = "Q";
+		}
+		if(number == 13){
+			stringNum = "K";
+		}
+		return stringNum;
+	}
+
 }
