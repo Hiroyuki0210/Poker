@@ -44,6 +44,6 @@ tomcat{
     ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
 }
 
-tasks.withType(JavaCompile){
+tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
