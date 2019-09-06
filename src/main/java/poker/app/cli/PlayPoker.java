@@ -6,83 +6,81 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
+import java.util.*;
 
-import poker.Card;
-import poker.Deck;
-import poker.PlayerHand;
-import poker.hand.Hand;
+import poker.domain.model.card.Card;
+import poker.domain.model.card.Deck;
+import poker.domain.model.card.Suit;
+import poker.domain.model.CardComparator;
+import poker.domain.model.hand.Hand;
+import poker.domain.service.PokerService;
+import poker.domain.service.PlayerHandDetail;
+
+/**
+ * CLIverポーカー
+ */
 
 public class PlayPoker {
-	//ポーカーの実行
+	private static final int MAX_EXCHANGE_NUM = 3; 
+
 	public static void main(String arg[]) {
-		try {
-			System.out.println("Let's do Poker!! Write start");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			String line = reader.readLine();
-			if(line.equals("start")) {
-				Deck deck = new Deck();                  //山札
-		    	List<Card> hand = new ArrayList<Card>(); //プレイヤー側の手札
+		PokerService pokerService = new PokerService();
+		//初期状態
+		pokerService.initialize();
+		println("初めのカードが配られました。");
+		printHand(pokerService.getPlayerHand());
 
-		    	System.out.print("手札 : 　");
-		    	for(int i=0; i < 5; i++){
-		    		hand.add(deck.draw());
-		    	}
-		    	PlayerHand.sort(hand);
+		Scanner scan = new Scanner(System.in);
 
-		    	for(int i=0; i<hand.size(); i++) {
-		    		System.out.print(hand.get(i).getSuit().icon+hand.get(i).getNum()+"　");
-		    	}
-		    	System.out.println("");
-		    	System.out.print(Hand.getHand(hand).getName()+"\n"+"\n");
+		int count = 0;
+		while(count < MAX_EXCHANGE_NUM){
+			println("交換したいカードの番号を選んでください。番号は左から0,1,2,3,4となっていて、複数交換する場合は　,　で区切ってください。");
+			println("交換せず終了する場合は、'q' を入力してください。");
 
-		    	//交換操作を3回行う
-		    	for(int i=0; i<3; i++){
-		    		System.out.println("交換したいカードの番号を選んでください(番号は左から0,1,2,3,4となっていて、複数ある場合は　,　で区切ってください");
-					System.out.println("交換したくない場合は,5を入力してください");
-					String line2 = reader.readLine();
-					String[] num = line2.split(",");
+			String input = scan.nextLine().trim();
 
-					if(Integer.parseInt(num[0]) != 5) {
-						change(hand,deck,num);
-					}else{
-						for(int j=0; j<hand.size(); j++) {
-				    		System.out.print(hand.get(j).getSuit().icon+hand.get(j).getNum()+"　");
-				    	}
-						System.out.print("\n"+Hand.getHand(hand).getName());
-						break ;
-					}
-		    	}
+			if(input.equals("q")){
+				break;
 			}
-		}catch(IOException e) {
-			e.printStackTrace();
-		}catch(NumberFormatException | IndexOutOfBoundsException e2){
-			System.out.println("※0～5の数字を入力してください。ゲームを終了します。\n");
+
+			try{
+				int[] indices = parseInput(input);
+			}catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
 		}
-	}
-
-
-	//カード交換用のメソッド
-	/**
-	 * @param hand
-	 * @param deck
-	 */
-	public static void change(List<Card> hand, Deck deck, String[] num)  throws IndexOutOfBoundsException{
-
-			List<Card> set = new ArrayList<>();     //削除するカードを一時的にsetに格納
-
-			if(Integer.parseInt(num[0]) != 5) {
-	    	for(int i=0; i < num.length; i++){
-	    		Collections.addAll(set, hand.get(Integer.parseInt(num[i])) );
-	    		hand.add(deck.draw());
-	    	}
-	    	hand.removeAll(set);
-	    	PlayerHand.sort(hand);
+		
+		
+		private static void println(String message){
+			System.out.println(message);
+		}
+	
+		private static void printHand(PlayerHandDetail playerHandDetail){
+			println("手札 : "+ printCards(playerHandDetail.getCards()));
+			println("役   : "+ playerHandDetail.getHand().getName());
+		}
+	
+		private static String printCards(List<Card> cards){
+			StringBuilder sb = new StringBuilder();
+			for(Card card : cards){
+				sb.append(card.getSuit().icon);
+				sb.append(card.getNum());
+				sb.append("　　");
 			}
+	
+			return sb.toString();
+		}
+	
+	
+		static int[] parseInput(String input){
+			try{
+				 return Arrays.stream(input.split(",")).mapToInt(Integer::parseInt).toArray();
+			}catch(NumberFormatException e){
+				println("0~4の数字もしくは'q'を入力してください。");
+			}
+		}
+		
 
-	    	System.out.print("手札 : 　");
-	    	for(int i=0; i<hand.size(); i++) {
-	    		System.out.print(hand.get(i).getSuit().icon+hand.get(i).getNum()+"　");
-	    	}
-	    	System.out.print("\n"+Hand.getHand(hand).getName()+"\n"+"\n");
-	}
+		
 }
