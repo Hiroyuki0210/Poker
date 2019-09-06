@@ -16,9 +16,21 @@ buildscript{
     }
 }
 
+// CLI ver
+apply plugin: 'application'
+
+mainClassName = 'poker.app.cli.PlayPoker'
+
+run{
+    standardInput = System.in
+}
+
+
+// Web ver
 apply plugin: 'war'
 
 apply plugin: 'com.bmuschko.tomcat'
+
 
 repositories{
     mavenCentral()
