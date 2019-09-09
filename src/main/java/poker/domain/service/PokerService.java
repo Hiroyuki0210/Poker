@@ -25,4 +25,19 @@ public class PokerService{
 
           return new PlayerHandDetail(cards, hand);
      }
+
+     //カード交換
+     public void exchangeCard(int[] indices){
+          List<Card> cards = player.getCards();
+          //指定カードを捨てる
+          List<Card> set = new ArrayList<>();
+          for(int index : indices){
+               Collections.addAll(set, cards.get(index));
+          }
+          cards.removeAll(set);
+
+          //捨てた枚数分、カードを引く
+          List<Card> drawCards = deck.draw(indices.length);
+          cards.addAll(drawCards);
+     }
 }
