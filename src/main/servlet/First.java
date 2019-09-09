@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import poker.Card;
-import poker.Deck;
+import poker.domain.model.card.Card;
+import poker.domain.model.card.Deck;
 import poker.PlayerHand;
 
 /**
