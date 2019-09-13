@@ -1,4 +1,4 @@
-package poker.hand;
+package poker.domain.model.hand;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.*;
@@ -6,8 +6,8 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.*;
 
 import java.util.*;
-import poker.Card;
-import poker.Suit;
+import poker.domain.model.card.Card;
+import poker.domain.model.card.Suit;
 
 public class FullHouseTest{
     @Test

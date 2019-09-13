@@ -26,7 +26,6 @@ public class Deck {
 			Card topCard = cards.remove(cards.size() -1);
 			drawCards.add(topCard);
 		}
-
 		return drawCards;
 	}
 }

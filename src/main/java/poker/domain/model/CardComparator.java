@@ -1,5 +1,4 @@
 package poker.domain.model;
-
 import java.util.*;
 
 import poker.domain.model.card.Card;

@@ -20,6 +20,7 @@ public abstract class Hand implements Comparable<Hand>{
                 hand.set(i, new Card(hand.get(i).getSuit(), 14));
             }
         }
+
         CardComparator.sort(hand);
 
         boolean isStraight = isStraight(hand);

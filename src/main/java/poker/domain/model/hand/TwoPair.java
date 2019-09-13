@@ -1,7 +1,6 @@
 package poker.domain.model.hand;
 
 import poker.domain.model.card.Card;
-
 import java.util.List;
 
 public class TwoPair extends Hand implements Comparable<Hand>{
