@@ -1,18 +1,17 @@
 package poker.app.cli;
 
-import java.util.List;
-import java.util.Scanner;
 import java.util.*;
 
+
 import poker.domain.model.card.Card;
-import poker.domain.service.PokerService;
 import poker.domain.service.PlayerHandDetail;
+import poker.domain.service.PokerService;
 
 /**
- * CLIverポーカー
+ * CLI 版
  */
-
 public class PlayPoker {
+
 	private static final int MAX_EXCHANGE_NUM = 3; 
 
 	public static void main(String arg[]) {
@@ -35,7 +34,7 @@ public class PlayPoker {
 			String input = scan.nextLine().trim();
 
 			//ゲーム終了
-			if(input.equals("q")){
+			if(inputValueIsQuit(input)){
 				println("終了します。");
 				break;
 			}
@@ -59,6 +58,11 @@ public class PlayPoker {
 		//System.out.printlnの簡略版
 		static void println(String message){
 			System.out.println(message);
+		}
+
+		//入力値が'q'か否かの判定
+		static boolean inputValueIsQuit(String line){
+			return "q".equals(line);
 		}
 	
 		//手札と役の表示
