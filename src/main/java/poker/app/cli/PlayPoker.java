@@ -3,7 +3,7 @@ package poker.app.cli;
 import java.util.*;
 
 
-import poker.domain.model.card.Card;
+import poker.domain.model.Card;
 import poker.domain.service.PlayerHandDetail;
 import poker.domain.service.PokerService;
 
@@ -40,7 +40,7 @@ public class PlayPoker {
 			}
 
 			try{
-				int[] indices = parseInput(input);
+				int[] indices = parseInputValue(input);
 				pokerService.exchangeCard(indices);
 
 				printHand(pokerService.getPlayerHand());
@@ -53,6 +53,7 @@ public class PlayPoker {
 				break;
 			}
 		}
+		scan.close();
 	}
 		
 		//System.out.printlnの簡略版
@@ -85,14 +86,11 @@ public class PlayPoker {
 		}
 	
 		//入力された文字列を数字列に変換
-		static int[] parseInput(String input){
+		static int[] parseInputValue(String input){
 			try{
-				 return Arrays.stream(input.split(",")).mapToInt(Integer::parseInt).toArray();
-			}catch(NullPointerException e){
-				println("0~4の数字もしくは'q'を入力してください。");
-				println("終了します。");
-				e.printStackTrace();
-				return null;
+				 return Arrays.stream(input.split(",")).filter(str -> !str.isEmpty()).mapToInt(Integer::parseInt).toArray();
+			}catch(NumberFormatException e){
+				throw new IllegalArgumentException(e.getMessage());
 			}
 		}
 		

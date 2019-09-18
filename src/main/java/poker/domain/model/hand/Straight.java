@@ -2,7 +2,7 @@ package poker.domain.model.hand;
 
 import java.util.List;
 
-import poker.domain.model.card.Card;
+import poker.domain.model.Card;
 
 public class Straight extends Hand implements Comparable<Hand>{
     private final List<Card> cards;

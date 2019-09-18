@@ -1,7 +1,7 @@
 package poker.domain.model.hand;
 
 import java.util.*;
-import poker.domain.model.card.Card;
+import poker.domain.model.Card;
 
 public class RoyalStraightFlush extends Hand implements Comparable<Hand>{
     private final List<Card> cards;

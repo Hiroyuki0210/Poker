@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import poker.domain.model.card.Card;
-import poker.domain.model.card.Suit;
+import poker.domain.model.Card;
+import poker.domain.model.Suit;
 
 public class ThreeOfAKindTest{
     @Test

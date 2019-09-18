@@ -1,7 +1,7 @@
 package poker.domain.service;
 
 import java.util.*;
-import poker.domain.model.card.Card;
+import poker.domain.model.Card;
 import poker.domain.model.hand.Hand;
 
 // プレイヤーの手札情報

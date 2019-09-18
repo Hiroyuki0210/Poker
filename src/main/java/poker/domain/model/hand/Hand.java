@@ -2,8 +2,8 @@ package poker.domain.model.hand;
 
 import java.util.*;
 
-import poker.domain.model.card.Card;
-import poker.domain.model.card.Suit;
+import poker.domain.model.Card;
+import poker.domain.model.Suit;
 import poker.domain.model.CardComparator;
 
 public abstract class Hand implements Comparable<Hand>{
@@ -21,7 +21,7 @@ public abstract class Hand implements Comparable<Hand>{
             }
         }
 
-        CardComparator.sort(hand);
+        hand.sort(new CardComparator());
 
         boolean isStraight = isStraight(hand);
         boolean isFlush  = isFlush(hand);
@@ -65,7 +65,7 @@ public abstract class Hand implements Comparable<Hand>{
             value = 4;
             last = 5;
             hand.set(4,new Card(hand.get(4).getSuit(), 1));
-            CardComparator.sort(hand);
+            hand.sort(new CardComparator());
         }
         return value + 1 == last ;
     }

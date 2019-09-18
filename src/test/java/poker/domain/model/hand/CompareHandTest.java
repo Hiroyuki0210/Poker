@@ -8,8 +8,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import poker.domain.model.card.Card;
-import poker.domain.model.card.Suit;
+import poker.domain.model.Card;
+import poker.domain.model.Suit;
 
 
 //役の強さのテスト

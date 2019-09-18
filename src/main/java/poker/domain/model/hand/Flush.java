@@ -1,6 +1,6 @@
 package poker.domain.model.hand;
 
-import poker.domain.model.card.Card;
+import poker.domain.model.Card;
 
 import java.util.List;
 
