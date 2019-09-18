@@ -2,7 +2,7 @@ package poker.domain.model;
 
 import java.util.*;
 
-import poker.domain.model.card.Card;
+import poker.domain.model.Card;
 
 //プレイヤーに関する機能
 public class Player{
@@ -14,6 +14,16 @@ public class Player{
 
      public List<Card> getCards(){
           return cards;
+     }
+
+     public void changeCard(int[] indices, List<Card> newCards){
+          List<Card> set = new ArrayList<>();
+          for(int index : indices){
+               Collections.addAll(set, cards.get(index));
+          }
+          cards.removeAll(set);
+
+          cards.addAll(newCards);
      }
 
 }

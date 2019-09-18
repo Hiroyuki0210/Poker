@@ -2,8 +2,8 @@ package poker.domain.service;
 
 import java.util.*;
 
-import poker.domain.model.card.Deck;
-import poker.domain.model.card.Card;
+import poker.domain.model.Deck;
+import poker.domain.model.Card;
 import poker.domain.model.hand.Hand;
 import poker.domain.model.Player;
 
@@ -28,16 +28,8 @@ public class PokerService{
 
      //カード交換
      public void exchangeCard(int[] indices){
-          List<Card> cards = player.getCards();
-          //指定カードを捨てる
-          List<Card> set = new ArrayList<>();
-          for(int index : indices){
-               Collections.addAll(set, cards.get(index));
-          }
-          cards.removeAll(set);
+          List<Card> newCards = deck.draw(indices.length);
 
-          //捨てた枚数分、カードを引く
-          List<Card> drawCards = deck.draw(indices.length);
-          cards.addAll(drawCards);
+          player.changeCard(indices,newCards);
      }
 }
