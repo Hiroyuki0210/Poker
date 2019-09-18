@@ -88,7 +88,7 @@ public class PlayPoker {
 		static int[] parseInput(String input){
 			try{
 				 return Arrays.stream(input.split(",")).mapToInt(Integer::parseInt).toArray();
-			}catch(NumberFormatException | NullPointerException e){
+			}catch(NullPointerException e){
 				println("0~4の数字もしくは'q'を入力してください。");
 				println("終了します。");
 				e.printStackTrace();
