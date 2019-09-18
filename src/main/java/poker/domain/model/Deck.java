@@ -1,4 +1,4 @@
-package poker.domain.model.card;
+package poker.domain.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

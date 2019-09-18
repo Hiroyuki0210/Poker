@@ -1,4 +1,4 @@
-package poker.domain.model.card;
+package poker.domain.model;
 
 public enum Suit {
 	SPADE("♠", 3),
