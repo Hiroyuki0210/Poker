@@ -88,7 +88,10 @@ public class PlayPoker {
 		//入力された文字列を数字列に変換
 		static int[] parseInputValue(String input){
 			try{
-				 return Arrays.stream(input.split(",")).filter(str -> !str.isEmpty()).mapToInt(Integer::parseInt).toArray();
+				return Arrays.stream(input.split(","))
+							.filter(str -> !str.isEmpty())
+							.mapToInt(Integer::parseInt)
+							.toArray();
 			}catch(NumberFormatException e){
 				throw new IllegalArgumentException(e.getMessage());
 			}
