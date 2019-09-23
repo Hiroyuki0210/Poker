@@ -1,6 +1,6 @@
 package poker.domain.model;
 
-public class Card{
+public class Card {
 	private Suit suit;
 	private int number;
 
@@ -17,18 +17,18 @@ public class Card{
 		return number;
 	}
 
-	public String getStringNum(){
+	public String getStringNum() {
 		String stringNum = String.valueOf(number);
-		if(number == 1 || number == 14){
+		if (number == 1 || number == 14) {
 			stringNum = "A";
 		}
-		if(number == 11){
+		if (number == 11) {
 			stringNum = "J";
 		}
-		if(number == 12){
+		if (number == 12) {
 			stringNum = "Q";
 		}
-		if(number == 13){
+		if (number == 13) {
 			stringNum = "K";
 		}
 		return stringNum;

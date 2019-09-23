@@ -1,29 +1,29 @@
 package poker.domain.model;
 
-import java.util.*;
-
-import poker.domain.model.Card;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 //プレイヤーに関する機能
-public class Player{
-     private List<Card> cards;
+public class Player {
+	private List<Card> cards;
 
-     public Player(List<Card> cards){
-          this.cards = cards;
-     }
+	public Player(List<Card> cards) {
+		this.cards = cards;
+	}
 
-     public List<Card> getCards(){
-          return cards;
-     }
+	public List<Card> getCards() {
+		return cards;
+	}
 
-     public void changeCard(int[] indices, List<Card> newCards){
-          List<Card> set = new ArrayList<>();
-          for(int index : indices){
-               Collections.addAll(set, cards.get(index));
-          }
-          cards.removeAll(set);
+	public void changeCard(int[] indices, List<Card> newCards) {
+		List<Card> set = new ArrayList<>();
+		for (int index : indices) {
+			Collections.addAll(set, cards.get(index));
+		}
+		cards.removeAll(set);
 
-          cards.addAll(newCards);
-     }
+		cards.addAll(newCards);
+	}
 
 }

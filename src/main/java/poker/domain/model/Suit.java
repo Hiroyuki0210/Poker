@@ -12,7 +12,7 @@ public enum Suit {
 	public final int strength;
 
 	// Constructor
-	Suit(String icon, int strength){
+	Suit(String icon, int strength) {
 		this.icon = icon;
 		this.strength = strength;
 	}

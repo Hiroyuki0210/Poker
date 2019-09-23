@@ -1,38 +1,38 @@
 package poker.domain.model.hand;
 
-import java.util.List;
-
 import poker.domain.model.Card;
 
-public class Straight extends Hand implements Comparable<Hand>{
-    private final List<Card> cards;
+import java.util.List;
 
-    public Straight(List<Card> cards){
-        this.cards = cards;
-    }
+public class Straight extends Hand implements Comparable<Hand> {
+	private final List<Card> cards;
 
-    @Override
-    public int getHandRank(){
-        return 5;
-    }
+	public Straight(List<Card> cards) {
+		this.cards = cards;
+	}
 
-    @Override
-    public int getSuitRank(){
-        return cards.get(cards.size()-1).getSuit().strength;
-    }
+	@Override
+	public int getHandRank() {
+		return 5;
+	}
 
-    @Override
-    public String getName(){
-        return "ストレート";
-    }
+	@Override
+	public int getSuitRank() {
+		return cards.get(cards.size() - 1).getSuit().strength;
+	}
 
-    @Override
-    public int compareTo(Hand o){
-        if(!(o instanceof Straight)){
-            return super.compareTo(o);
-        }
+	@Override
+	public String getName() {
+		return "ストレート";
+	}
 
-        Straight other = (Straight) o;
-        return compareRate(this.cards, other.cards);
-    }
+	@Override
+	public int compareTo(Hand o) {
+		if (!(o instanceof Straight)) {
+			return super.compareTo(o);
+		}
+
+		Straight other = (Straight) o;
+		return compareRate(this.cards, other.cards);
+	}
 }
