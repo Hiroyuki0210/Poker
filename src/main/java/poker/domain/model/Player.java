@@ -7,13 +7,22 @@ import java.util.List;
 //プレイヤーに関する機能
 public class Player {
 	private List<Card> cards;
+	private String name;
 
-	public Player(List<Card> cards) {
+	public Player(List<Card> cards, String name) {
 		this.cards = cards;
+		if(name == null || name.trim().equals("")){
+			this.name = "player";
+		}
+		this.name = name;
 	}
 
 	public List<Card> getCards() {
 		return cards;
+	}
+
+	public String getName(){
+		return name;
 	}
 
 	public void changeCard(int[] indices, List<Card> newCards) {
