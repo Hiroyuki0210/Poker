@@ -1,11 +1,14 @@
 package poker.app.cli;
 
 import poker.domain.model.Card;
+import poker.domain.model.Player;
 import poker.domain.service.PlayerHandDetail;
 import poker.domain.service.PokerService;
+import poker.domain.model.HandComparator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,45 +19,92 @@ public class PlayPoker {
 	private static final int MAX_EXCHANGE_NUM = 3;
 
 	public static void main(String arg[]) {
-		PokerService pokerService = new PokerService();
-
-		//初期状態
-		pokerService.initialize();
-		println("初めのカードが配られました。");
-		println("");
-		printHand(pokerService.getPlayerHand());
-
 		Scanner scan = new Scanner(System.in);
 
-		int count = 0;
-		while (count < MAX_EXCHANGE_NUM) {
+		println("対戦相手(コンピュータ)の数を入力してください。");
+		println("コンピュータ数の上限は3です。");
+		println("1人でプレイする場合は、0を入力してください。");
+
+		try {
+			int numberOfCP = Integer.parseInt(scan.nextLine());
+			if (numberOfCP < 0 || 3 < numberOfCP) {
+				scan.close();
+				throw new IndexOutOfBoundsException("0～3 の数を入力してください。");
+			}
+			PokerService pokerService = new PokerService(numberOfCP);
+		
+		
+			//初期状態
+			pokerService.initialize();
+			List<Player> players = pokerService.getPlayers();
+			println("初めのカードが配られました。\n");
+			for (Player player : players) {
+				println(player.getName());
+				printHand(pokerService.getPlayerHand(player));
+				println("");
+			}
+
+
+			//カード交換
+			int count = 0;
+
+			println("<カード交換>");
 			println("交換したいカードの番号を選んでください。");
 			println("番号は左から0,1,2,3,4となっていて、複数交換する場合は　,　で区切ってください。");
 			println("交換せず終了する場合は、'q' を入力してください。\n");
 
-			String input = scan.nextLine().trim();
+			while (count < MAX_EXCHANGE_NUM) {
+				println("ラウンド" + (count+1) + "\n");
 
-			//ゲーム終了
-			if (inputValueIsQuit(input)) {
-				println("終了します。");
-				break;
-			}
+				for (Player player : players) {
+					println(player.getName() + "　のターンです。");
 
-			try {
-				int[] indices = parseInputValue(input);
-				pokerService.exchangeCard(indices);
+					if (player.getName().equals("プレイヤー")) {
+						String input = scan.nextLine().trim();
 
-				printHand(pokerService.getPlayerHand());
+						//ゲーム終了
+						if (inputValueIsQuit(input)) {
+							printHand(pokerService.getPlayerHand(player));
+							continue;
+						}
+	
+						try {
+							int[] indices = parseInputValue(input);
+							pokerService.exchangeCard(indices, player);
+	
+						} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+							println("入力値が誤っています。");
+							println("終了します。");
+							e.printStackTrace();
+							break;
+						}
+					}else{
+						pokerService.autoExchangeCard(player);
+					}
+
+					printHand(pokerService.getPlayerHand(player));
+					
+				}
+
+				println("");
 
 				count++;
-			} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-				println("入力値が誤っています。");
-				println("終了します。");
-				e.printStackTrace();
-				break;
+
 			}
+
+			//結果
+			println("<結果>");
+			List<Player> rankList = result(players);
+			for (int i = 0; i < rankList.size() ; i++) {
+				println((i+1) + "位 : " + rankList.get(i).getName());
+			}
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		}
+
 		scan.close();
+
 	}
 
 	//System.out.printlnの簡略版
@@ -96,6 +146,16 @@ public class PlayPoker {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
+	}
+
+	/**
+	 * プレイヤーの順位
+	 * 戻り値には、手札が強いプレイヤーを順に格納する。
+	 */
+	static List<Player> result(List<Player> players){
+		players.sort(new HandComparator());
+
+		return players;
 	}
 
 }
