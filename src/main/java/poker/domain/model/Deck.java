@@ -12,7 +12,7 @@ public class Deck {
 		this.cards = new ArrayList<>();
 
 		for (Suit suit : Suit.values()) {
-			for(int j = 1; j <= 13; j++) {
+			for (int j = 1; j <= 13; j++) {
 				cards.add(new Card(suit, j));
 			}
 		}
@@ -22,8 +22,8 @@ public class Deck {
 	//一番上のカードを引く,引いたカードはデッキから外す
 	public List<Card> draw(int size) {
 		List<Card> drawCards = new ArrayList<>();
-		for(int i=0; i<size; i++){
-			Card topCard = cards.remove(cards.size() -1);
+		for (int i = 0; i < size; i++) {
+			Card topCard = cards.remove(cards.size() - 1);
 			drawCards.add(topCard);
 		}
 		return drawCards;
