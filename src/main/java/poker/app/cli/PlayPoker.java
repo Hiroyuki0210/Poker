@@ -22,12 +22,12 @@ public class PlayPoker {
 		Scanner scan = new Scanner(System.in);
 
 		println("対戦相手(コンピュータ)の数を入力してください。");
-		println("コンピュータ数の上限は3です。");
+		println("コンピュータ数の上限は2です。");
 		println("1人でプレイする場合は、0を入力してください。");
 
 		try {
 			int numberOfCP = Integer.parseInt(scan.nextLine());
-			if (numberOfCP < 0 || 3 < numberOfCP) {
+			if (numberOfCP < 0 || 2 < numberOfCP) {
 				scan.close();
 				throw new IndexOutOfBoundsException("0～3 の数を入力してください。");
 			}
