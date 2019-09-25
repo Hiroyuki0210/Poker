@@ -7,6 +7,16 @@ import static org.junit.Assert.assertThat;
 
 public class InputValueTest {
     @Test
+    public void inputNumberOfCompute_Over() {
+        assertThat(PlayPoker.inputNumberOfComputer(4), is(false));
+    }
+
+    @Test
+    public void inputNumberOfCompute() {
+        assertThat(PlayPoker.inputNumberOfComputer(1), is(true));
+    }
+
+    @Test
     public void inputValueIsQuit_empty() {
         assertThat(PlayPoker.inputValueIsQuit(""), is(false));
     }
@@ -31,4 +41,5 @@ public class InputValueTest {
         int[] expect = {0, 2, 4};
         assertThat(out, is(expect));
     }
+
 }
