@@ -4,11 +4,9 @@ import poker.domain.model.Card;
 import poker.domain.model.Player;
 import poker.domain.service.PlayerHandDetail;
 import poker.domain.service.PokerService;
-import poker.domain.model.HandComparator;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -27,7 +25,7 @@ public class PlayPoker {
 
 		try {
 			int numberOfCP = Integer.parseInt(scan.nextLine());
-			if (numberOfCP < 0 || 2 < numberOfCP) {
+			if (! inputNumberOfComputer(numberOfCP)) {
 				scan.close();
 				throw new IndexOutOfBoundsException("0～3 の数を入力してください。");
 			}
@@ -94,7 +92,7 @@ public class PlayPoker {
 
 			//結果
 			println("<結果>");
-			List<Player> rankList = result(players);
+			List<Player> rankList = pokerService.result(players);
 			for (int i = 0; i < rankList.size() ; i++) {
 				println((i+1) + "位 : " + rankList.get(i).getName());
 			}
@@ -110,6 +108,10 @@ public class PlayPoker {
 	//System.out.printlnの簡略版
 	static void println(String message) {
 		System.out.println(message);
+	}
+
+	static boolean inputNumberOfComputer(int num){
+		return (0 <= num && num <= 2);
 	}
 
 	//入力値が'q'か否かの判定
@@ -146,16 +148,6 @@ public class PlayPoker {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-	}
-
-	/**
-	 * プレイヤーの順位
-	 * 戻り値には、手札が強いプレイヤーを順に格納する。
-	 */
-	static List<Player> result(List<Player> players){
-		players.sort(new HandComparator());
-
-		return players;
 	}
 
 }

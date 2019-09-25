@@ -4,6 +4,7 @@ import poker.domain.model.Card;
 import poker.domain.model.Deck;
 import poker.domain.model.Player;
 import poker.domain.model.hand.Hand;
+import poker.domain.model.HandComparator;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class PokerService {
 	 * コンピュータの自動カード交換
 	 * Nothing以外の役が出るまでカード交換する。
 	 */
-	public void autoExchangeCard(Player computer){
+	public void autoExchangeCard(Player computer) {
 		List<Card> computerCard = computer.getCards();
 		if (Hand.getHand(computerCard).getHandRank() == 9) {
 			int[] changeCards = {0,1,2};
@@ -69,5 +70,14 @@ public class PokerService {
 		}
 	}
 
+	/**
+	 * プレイヤーの順位
+	 * 戻り値には、手札が強いプレイヤーを順に格納する。
+	 */
+	public List<Player> result(List<Player> players) {
+		players.sort(new HandComparator());
+
+		return players;
+	}
 	
 }
