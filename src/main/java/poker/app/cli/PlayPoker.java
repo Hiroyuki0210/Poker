@@ -36,6 +36,9 @@ public class PlayPoker {
 			pokerService.initialize();
 			List<Player> players = pokerService.getPlayers();
 			println("初めのカードが配られました。\n");
+
+			println("ラウンド1\n");
+
 			for (Player player : players) {
 				println(player.getName());
 				printHand(pokerService.getPlayerHand(player));
@@ -45,21 +48,23 @@ public class PlayPoker {
 
 			//カード交換
 			int count = 0;
+			boolean COMPLETE_HAND = false;
+			String input = null;
 
 			println("<カード交換>");
 			println("交換したいカードの番号を選んでください。");
 			println("番号は左から0,1,2,3,4となっていて、複数交換する場合は　,　で区切ってください。");
 			println("交換せず終了する場合は、'q' を入力してください。\n");
-
-			while (count < MAX_EXCHANGE_NUM) {
-				println("ラウンド" + (count+1) + "\n");
+ 
+			loop : while (count < MAX_EXCHANGE_NUM) {
+				println("ラウンド" + (count+2) + "\n");
 
 				for (Player player : players) {
 					println(player.getName() + "　のターンです。");
 
 					if (player.getName().equals("プレイヤー")) {
-						String input = scan.nextLine().trim();
-
+						input = scan.nextLine().trim();
+						
 						//ゲーム終了
 						if (inputValueIsQuit(input)) {
 							printHand(pokerService.getPlayerHand(player));
@@ -78,9 +83,18 @@ public class PlayPoker {
 						}
 					}else{
 						pokerService.autoExchangeCard(player);
+
+						int computerHandRank = pokerService.getPlayerHand(player).getHand().getHandRank();
+						if(computerHandRank != 9){
+							COMPLETE_HAND = true;
+						}
 					}
 
 					printHand(pokerService.getPlayerHand(player));
+
+					if (inputValueIsQuit(input) && COMPLETE_HAND) {
+						break loop;
+					}
 					
 				}
 
@@ -104,6 +118,20 @@ public class PlayPoker {
 		scan.close();
 
 	}
+
+	/*
+	static boolean completeHand(int numberOfCP, int countCPTurn, int handRank) {
+		boolean COMPLETE_HAND = false;
+		while (countCPTurn < numberOfCP) {
+			if(handRank == 9){
+				break;
+			}
+			countCPTurn++;
+		}
+		
+		return COMPLETE_HAND;
+	}
+	*/
 
 	//System.out.printlnの簡略版
 	static void println(String message) {
