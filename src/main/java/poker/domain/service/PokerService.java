@@ -5,6 +5,7 @@ import poker.domain.model.Deck;
 import poker.domain.model.Player;
 import poker.domain.model.hand.Hand;
 import poker.domain.model.HandComparator;
+import poker.domain.service.PlayerHandDetail;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,11 +14,11 @@ import java.util.ArrayList;
 public class PokerService {
 
 	private Deck deck;
-	private int numberOfCP;
+	private int numberOfComputer;
 	private List<Player> players;
 
-	public PokerService(int numberOfCP) {
-		this.numberOfCP = numberOfCP;
+	public PokerService(int numberOfComputer) {
+		this.numberOfComputer = numberOfComputer;
 	}
 
 	public void initialize() {
@@ -30,7 +31,7 @@ public class PokerService {
 		players.add(player);
 
 		//コンピュータの初期状態
-		for(int i = 0; i < numberOfCP; i++) {
+		for (int i = 0; i < numberOfComputer; i++) {
 			List<Card> ComputerCards = deck.draw(5);
 			Player computer = new Player(ComputerCards, "コンピュータ" + (i+1));
 			players.add(computer);
@@ -68,6 +69,25 @@ public class PokerService {
 
 			computer.changeCard(changeCards, newCards);
 		}
+	}
+
+	//全コンピュータの手札の役がnothingか否かの判定
+	public boolean completeHand(Player computer) {
+		boolean COMPLETE_HAND = false;
+		List<Card> computerCards = computer.getCards();
+		PlayerHandDetail handDetail = new PlayerHandDetail(computerCards, Hand.getHand(computerCards));
+		int computerHandRank = handDetail.getHand().getHandRank();
+		String computerName = computer.getName();
+
+		if  (computerName.contains("コンピュータ") && computerHandRank == 9) {
+			return false;
+		}
+
+		if (computerName.equals("コンピュータ" + numberOfComputer) && computerHandRank != 9) {
+			COMPLETE_HAND = true;
+		}
+
+		return COMPLETE_HAND;
 	}
 
 	/**
