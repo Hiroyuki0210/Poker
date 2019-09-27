@@ -24,12 +24,12 @@ public class PlayPoker {
 		println("1人でプレイする場合は、0を入力してください。");
 
 		try {
-			int numberOfCP = Integer.parseInt(scan.nextLine());
-			if (! inputNumberOfComputer(numberOfCP)) {
+			int numberOfComputer = Integer.parseInt(scan.nextLine());
+			if (! inputNumberOfComputer(numberOfComputer)) {
 				scan.close();
 				throw new IndexOutOfBoundsException("0～3 の数を入力してください。");
 			}
-			PokerService pokerService = new PokerService(numberOfCP);
+			PokerService pokerService = new PokerService(numberOfComputer);
 		
 		
 			//初期状態
@@ -83,11 +83,8 @@ public class PlayPoker {
 						}
 					}else{
 						pokerService.autoExchangeCard(player);
-
-						int computerHandRank = pokerService.getPlayerHand(player).getHand().getHandRank();
-						if(computerHandRank != 9){
-							COMPLETE_HAND = true;
-						}
+						
+						COMPLETE_HAND = pokerService.completeHand(player);
 					}
 
 					printHand(pokerService.getPlayerHand(player));
@@ -95,7 +92,6 @@ public class PlayPoker {
 					if (inputValueIsQuit(input) && COMPLETE_HAND) {
 						break loop;
 					}
-					
 				}
 
 				println("");
@@ -118,20 +114,6 @@ public class PlayPoker {
 		scan.close();
 
 	}
-
-	/*
-	static boolean completeHand(int numberOfCP, int countCPTurn, int handRank) {
-		boolean COMPLETE_HAND = false;
-		while (countCPTurn < numberOfCP) {
-			if(handRank == 9){
-				break;
-			}
-			countCPTurn++;
-		}
-		
-		return COMPLETE_HAND;
-	}
-	*/
 
 	//System.out.printlnの簡略版
 	static void println(String message) {
