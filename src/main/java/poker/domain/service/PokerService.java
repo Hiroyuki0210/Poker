@@ -71,7 +71,7 @@ public class PokerService {
 		}
 	}
 
-	//全コンピュータの手札の役がnothingか否かの判定
+	//各コンピュータの手札の役がnothingか否かの判定
 	public boolean completeHand(Player computer) {
 		boolean COMPLETE_HAND = false;
 		List<Card> computerCards = computer.getCards();
