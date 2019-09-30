@@ -10,12 +10,14 @@ import poker.domain.service.PlayerHandDetail;
 import java.util.List;
 import java.util.ArrayList;
 
-
+//全プレイヤーの共通機能を持つ
 public class PokerService {
 
 	private Deck deck;
 	private int numberOfComputer;
 	private List<Player> players;
+	private Player targetPlayer;
+
 
 	public PokerService(int numberOfComputer) {
 		this.numberOfComputer = numberOfComputer;
@@ -25,17 +27,13 @@ public class PokerService {
 		deck = new Deck();
 		List<Player> players = new ArrayList<>();
 
-		//プレイヤーの初期状態
-		List<Card> playrCards = deck.draw(5);
-		Player player = new Player(playrCards, "プレイヤー");
-		players.add(player);
-
-		//コンピュータの初期状態
-		for (int i = 0; i < numberOfComputer; i++) {
-			List<Card> ComputerCards = deck.draw(5);
-			Player computer = new Player(ComputerCards, "コンピュータ" + (i+1));
-			players.add(computer);
+		//プレイヤーとコンピュータの初期状態
+		for (int i = 0; i <= numberOfComputer; i++) {
+			List<Card> playerCards = deck.draw(5);
+			Player player = new Player(playerCards, i);
+			players.add(player);
 		}
+
 		this.players = players;
 	}
 
@@ -43,58 +41,35 @@ public class PokerService {
 		return players;
 	}
 
-	public PlayerHandDetail getPlayerHand(Player player) {
-		List<Card> cards = player.getCards();
+	public void chooseTargetPlayer(Player targetPlayer){
+		this.targetPlayer = targetPlayer;
+	}
+
+	public int getNumberOfComputer(){
+		return numberOfComputer;
+	}
+
+
+	//手札の詳細(カードと役)
+	public PlayerHandDetail getPlayerHand() {
+		List<Card> cards = targetPlayer.getCards();
 		Hand hand = Hand.getHand(cards);
 
 		return new PlayerHandDetail(cards, hand);
 	}
 
 	//プレイヤーのカード交換
-	public void exchangeCard(int[] indices, Player player) {
+	public void exchangeCard(int[] indices) {
 		List<Card> newCards = deck.draw(indices.length);
 
-		player.changeCard(indices, newCards);
-	}
-
-	/**
-	 * コンピュータの自動カード交換
-	 * Nothing以外の役が出るまでカード交換する。
-	 */
-	public void autoExchangeCard(Player computer) {
-		List<Card> computerCard = computer.getCards();
-		if (Hand.getHand(computerCard).getHandRank() == 9) {
-			int[] changeCards = {0,1,2};
-			List<Card> newCards = deck.draw(3);
-
-			computer.changeCard(changeCards, newCards);
-		}
-	}
-
-	//各コンピュータの手札の役がnothingか否かの判定
-	public boolean completeHand(Player computer) {
-		boolean COMPLETE_HAND = false;
-		List<Card> computerCards = computer.getCards();
-		PlayerHandDetail handDetail = new PlayerHandDetail(computerCards, Hand.getHand(computerCards));
-		int computerHandRank = handDetail.getHand().getHandRank();
-		String computerName = computer.getName();
-
-		if  (computerName.contains("コンピュータ") && computerHandRank == 9) {
-			return false;
-		}
-
-		if (computerName.equals("コンピュータ" + numberOfComputer) && computerHandRank != 9) {
-			COMPLETE_HAND = true;
-		}
-
-		return COMPLETE_HAND;
+		targetPlayer.changeCard(indices, newCards);
 	}
 
 	/**
 	 * プレイヤーの順位
 	 * 戻り値には、手札が強いプレイヤーを順に格納する。
 	 */
-	public List<Player> result(List<Player> players) {
+	public List<Player> result() {
 		players.sort(new HandComparator());
 
 		return players;
