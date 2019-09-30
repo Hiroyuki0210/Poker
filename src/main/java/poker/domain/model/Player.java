@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import poker.domain.model.PlayerName;
+
 //プレイヤーに関する機能
 public class Player {
 	private List<Card> cards;
 	private String name;
 
-	public Player(List<Card> cards, String name) {
+	//引数indは、PlayerNameクラスで割り振られている番号
+	public Player(List<Card> cards, int ind) {
 		this.cards = cards;
-		if(name == null || name.trim().equals("")){
-			this.name = "player";
+
+		for (PlayerName playerName : PlayerName.values()) {
+			if (playerName.getIndex() == ind) {
+				name = playerName.getName();
+			}
 		}
-		this.name = name;
 	}
 
 	public List<Card> getCards() {
