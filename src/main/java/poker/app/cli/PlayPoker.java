@@ -2,6 +2,8 @@ package poker.app.cli;
 
 import poker.domain.model.Card;
 import poker.domain.model.Player;
+import poker.domain.model.PlayerName;
+import poker.domain.model.CpuExchange;
 import poker.domain.service.PlayerHandDetail;
 import poker.domain.service.PokerService;
 
@@ -22,33 +24,29 @@ public class PlayPoker {
 		println("対戦相手(コンピュータ)の数を入力してください。");
 		println("コンピュータ数の上限は2です。");
 		println("1人でプレイする場合は、0を入力してください。");
-
-		try {
-			int numberOfComputer = Integer.parseInt(scan.nextLine());
-			if (! inputNumberOfComputer(numberOfComputer)) {
-				scan.close();
-				throw new IndexOutOfBoundsException("0～3 の数を入力してください。");
-			}
-			PokerService pokerService = new PokerService(numberOfComputer);
 		
+		int numberOfComputer = inputNumberOfComputer(scan.nextLine());
+
+			PokerService pokerService = new PokerService(numberOfComputer);
 		
 			//初期状態
 			pokerService.initialize();
 			List<Player> players = pokerService.getPlayers();
 			println("初めのカードが配られました。\n");
 
-			println("ラウンド1\n");
+			println("ラウンド1 \n");
 
 			for (Player player : players) {
+				pokerService.chooseTargetPlayer(player);
 				println(player.getName());
-				printHand(pokerService.getPlayerHand(player));
+				printHand(pokerService.getPlayerHand());
 				println("");
 			}
 
 
 			//カード交換
 			int count = 0;
-			boolean COMPLETE_HAND = false;
+			boolean completeHand = false;
 			String input = null;
 
 			println("<カード交換>");
@@ -62,18 +60,23 @@ public class PlayPoker {
 				for (Player player : players) {
 					println(player.getName() + "　のターンです。");
 
-					if (player.getName().equals("プレイヤー")) {
+					pokerService.chooseTargetPlayer(player);
+
+					//enumで名前を区別
+					// Enum { People, CPU };
+					// isCPU() // true = CPU, false=人間
+					if ( player.getName().equals(PlayerName.PLAYER.getName()) ) {
 						input = scan.nextLine().trim();
 						
 						//ゲーム終了
 						if (inputValueIsQuit(input)) {
-							printHand(pokerService.getPlayerHand(player));
+							printHand(pokerService.getPlayerHand());
 							continue;
 						}
 	
 						try {
 							int[] indices = parseInputValue(input);
-							pokerService.exchangeCard(indices, player);
+							pokerService.exchangeCard(indices);
 	
 						} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
 							println("入力値が誤っています。");
@@ -81,15 +84,19 @@ public class PlayPoker {
 							e.printStackTrace();
 							break;
 						}
-					}else{
-						pokerService.autoExchangeCard(player);
-						
-						COMPLETE_HAND = pokerService.completeHand(player);
+					} else {
+						CpuExchange cpuExchange = new CpuExchange();
+						int[] indices = cpuExchange.getIndices(player);
+						if (indices != null) {
+							pokerService.exchangeCard(indices);
+						} else {
+							completeHand = cpuExchange.completeHand(player, pokerService.getNumberOfComputer());
+						}
 					}
 
-					printHand(pokerService.getPlayerHand(player));
+					printHand(pokerService.getPlayerHand());
 
-					if (inputValueIsQuit(input) && COMPLETE_HAND) {
+					if (inputValueIsQuit(input) && completeHand) {
 						break loop;
 					}
 				}
@@ -102,26 +109,34 @@ public class PlayPoker {
 
 			//結果
 			println("<結果>");
-			List<Player> rankList = pokerService.result(players);
+			List<Player> rankList = pokerService.result();
 			for (int i = 0; i < rankList.size() ; i++) {
 				println((i+1) + "位 : " + rankList.get(i).getName());
 			}
 
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-
 		scan.close();
-
 	}
+		
+
 
 	//System.out.printlnの簡略版
 	static void println(String message) {
 		System.out.println(message);
 	}
 
-	static boolean inputNumberOfComputer(int num){
-		return (0 <= num && num <= 2);
+	//コンピュータ数の入力
+	static int inputNumberOfComputer(String stringNum) {
+		try {
+			int num = Integer.parseInt(stringNum);
+			if (!(0 <= num && num <= 2)) {
+				throw new IllegalArgumentException("0～3 の数を入力してください。");
+			}
+			return num;
+
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		
 	}
 
 	//入力値が'q'か否かの判定
