@@ -15,6 +15,12 @@ public class HandComparator implements Comparator<Player> {
           List<Card> c1 = p1.getCards();
           List<Card> c2 = p2.getCards();
 
-          return Hand.getHand(c2).compareTo(Hand.getHand(c1));
+          int a = Hand.getHand(c2).compareTo(Hand.getHand(c1));
+
+          if (a  == 0) {
+               return Hand.getHand(c2).getSuitRank() - Hand.getHand(c1).getSuitRank();
+          }
+
+          return a;
 	}
 }
