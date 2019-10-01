@@ -14,6 +14,7 @@ import poker.domain.model.Player;
 public class AutoExchangingTest{
      PokerService pokerService = new PokerService(1);
      List<Card> computerHand = new ArrayList<>();
+     CpuExchange cpuExchange = new CpuExchange();
 
      @Test
      public void autoExchangingTest(){
@@ -27,16 +28,18 @@ public class AutoExchangingTest{
           computerHand.add(new Card(Suit.DIAMOND,10));
           computerHand.add(new Card(Suit.SPADE,13));
 
-          Player computer = new Player(computerHand,"コンピュータ1");
+          Player computer = new Player(computerHand, 1);
+          pokerService.chooseTargetPlayer(computer);
 
           List<Card> before = new ArrayList<>();
           before.addAll(computerHand);
 
-          pokerService.autoExchangeCard(computer);
+          int[] indices = cpuExchange.getIndices(computer);
 
-          List<Card> after = computer.getCards();
+          pokerService.exchangeCard(indices);
+
+          List<Card> after = pokerService.getPlayerHand().getCards();
           
           assertThat(before, is(not(after)));
-          
      }
 }

@@ -6,14 +6,18 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class InputValueTest {
-    @Test
-    public void inputNumberOfCompute_Over() {
-        assertThat(PlayPoker.inputNumberOfComputer(4), is(false));
+    @Test(expected = IllegalArgumentException.class)
+    public void inputNumberOfCompute_over() {
+        int out = PlayPoker.inputNumberOfComputer("");
+        int expect = 0;
+        assertThat(out, is(expect));
     }
 
     @Test
     public void inputNumberOfCompute() {
-        assertThat(PlayPoker.inputNumberOfComputer(1), is(true));
+        int out = PlayPoker.inputNumberOfComputer("2");
+        int expect = 2;
+        assertThat(out, is(expect));
     }
 
     @Test
